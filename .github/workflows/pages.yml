@@ -29,6 +29,8 @@ jobs:
       - name: Validate and assemble public website
         run: |
           node --check dist/theme.js
+          node --check dist/logo.js
+          node --check dist/assets/logo-motion.js
           python3 scripts/build_pages.py
       - name: Configure GitHub Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5

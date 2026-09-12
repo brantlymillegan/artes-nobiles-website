@@ -14,12 +14,16 @@ PUBLIC_FILES = (
     "index.html",
     "styles.css",
     "theme.js",
+    "logo.js",
     "CNAME",
     ".nojekyll",
     "assets/app-store-badge.svg",
     "assets/christmas-story-cover.png",
     "assets/company-logo-black.svg",
     "assets/company-logo-white.svg",
+    "assets/company-logo-animated-black.svg",
+    "assets/company-logo-animated-white.svg",
+    "assets/logo-motion.js",
     "assets/dm-sans-regular.ttf",
     "assets/noto-serif-variable.ttf",
     "assets/favicon.svg",
@@ -40,7 +44,7 @@ class PageReferences(HTMLParser):
         attributes = dict(attributes)
         if "id" in attributes:
             self.ids.add(attributes["id"])
-        for name in ("href", "src"):
+        for name in ("href", "src", "data-logo-src"):
             if attributes.get(name):
                 self.references.append(attributes[name])
 

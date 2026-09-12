@@ -90,8 +90,15 @@ p, h1, h2 { margin: 0; }
 .container { width: min(1100px, 88%); margin-inline: auto; }
 .site-header { position: relative; text-align: center; padding-block: 36px 24px; border-bottom: 1px solid var(--rule); }
 .site-header h1 { font-size: inherit; font-weight: inherit; }
-.company-logo { display: block; width: min(260px, 100%); aspect-ratio: 1; margin-inline: auto; }
-.company-logo img { width: 100%; height: auto; }
+.company-logo { position: relative; display: block; width: min(260px, 100%); aspect-ratio: 1; margin-inline: auto; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; appearance: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.company-logo-theme { position: absolute; inset: 0; }
+.company-logo img, .company-logo-motion svg { width: 100%; height: auto; }
+.company-logo-static, .company-logo-motion { position: absolute; inset: 0; pointer-events: none; transition: opacity 160ms ease; }
+.company-logo-static { opacity: 1; }
+.company-logo-motion { opacity: 0; }
+.company-logo.is-playing .company-logo-static { opacity: 0; }
+.company-logo.is-playing .company-logo-motion { opacity: 1; }
+.company-logo.is-initial .company-logo-static, .company-logo.is-initial .company-logo-motion { transition: none; }
 .company-logo .company-logo-light { display: var(--logo-light-display); }
 .company-logo .company-logo-dark { display: var(--logo-dark-display); }
 .wordmark { font-family: Georgia, "Times New Roman", serif; font-size: 2.55rem; font-weight: 700; letter-spacing: .13em; line-height: 1.35; }

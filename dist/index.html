@@ -11,7 +11,8 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="preload" href="assets/noto-serif-variable.ttf" as="font" type="font/ttf" crossorigin>
     <script src="theme.js?v=4"></script>
-    <link rel="stylesheet" href="styles.css?v=17">
+    <script type="module" src="logo.js?v=1"></script>
+    <link rel="stylesheet" href="styles.css?v=18">
   </head>
   <body>
     <a class="skip-link" href="#our-work">Skip to our work</a>
@@ -23,10 +24,17 @@
         <div class="theme-menu-options" id="theme-options" role="group" aria-label="Choose color theme" aria-hidden="true"></div>
       </div>
       <h1>
-        <a class="company-logo" href="#top" aria-label="Artes Nobiles home">
-          <img class="company-logo-light" src="assets/company-logo-black.svg" width="1434" height="1434" alt="">
-          <img class="company-logo-dark" src="assets/company-logo-white.svg" width="1434" height="1434" alt="">
-        </a>
+        <span class="visually-hidden">Artes Nobiles</span>
+        <button class="company-logo" type="button" aria-label="Replay Artes Nobiles logo animation">
+          <span class="company-logo-theme company-logo-light" aria-hidden="true">
+            <img class="company-logo-static" src="assets/company-logo-black.svg?v=2" width="1434" height="1434" alt="">
+            <span class="company-logo-motion" data-logo-src="assets/company-logo-animated-black.svg"></span>
+          </span>
+          <span class="company-logo-theme company-logo-dark" aria-hidden="true">
+            <img class="company-logo-static" src="assets/company-logo-white.svg?v=2" width="1434" height="1434" alt="">
+            <span class="company-logo-motion" data-logo-src="assets/company-logo-animated-white.svg"></span>
+          </span>
+        </button>
       </h1>
       <nav aria-label="Products">
         <a href="#rosarium" class="rosarium-brand nav-rosarium">ROSARIUM</a>

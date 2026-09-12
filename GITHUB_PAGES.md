@@ -9,7 +9,8 @@ Repository: [brantlymillegan/artes-nobiles-website](https://github.com/brantlymi
 - Pages source: **GitHub Actions**.
 - Initial [deployment succeeded](https://github.com/brantlymillegan/artes-nobiles-website/actions/runs/34707198525). The published HTML matched the local source exactly, and all 13 supporting website files returned HTTP 200.
 - Custom domain **artesnobiles.com** is saved in [Settings → Pages](https://github.com/brantlymillegan/artes-nobiles-website/settings/pages).
-- **Remaining:** update GoDaddy DNS using the records below. GitHub cannot issue the custom-domain certificate yet; the HTTPS-enforcement request returned “The certificate does not exist yet.” Enable **Enforce HTTPS** after DNS validation and certificate issuance.
+- The apex and `www` DNS records were verified on both authoritative GoDaddy nameservers on September 12, 2026; GitHub also validates both domains as eligible for HTTPS.
+- **Remaining:** GitHub has not yet issued the custom-domain certificate. Enable **Enforce HTTPS** after certificate issuance.
 
 Changes pushed to `master` deploy automatically. To redeploy manually, use **Actions → Deploy website to GitHub Pages → Run workflow** on `master`. Pushes to other branches do not publish.
 
@@ -21,7 +22,7 @@ The workflow validates the site, stages only the files listed in `PUBLIC_FILES` 
 
 At the DNS provider for `artesnobiles.com`, use these records after setting the custom domain in GitHub:
 
-The authoritative DNS provider is GoDaddy (`ns55.domaincontrol.com` and `ns56.domaincontrol.com`). On September 12, 2026, the domain's existing `@` A records were `76.223.105.230` and `13.248.243.5`, and `www` pointed to `artesnobiles.com`. Replace those web records with the following; no nameserver change is needed.
+The authoritative DNS provider is GoDaddy (`ns55.domaincontrol.com` and `ns56.domaincontrol.com`). On September 12, 2026, the user replaced the old WebsiteBuilder records with the following records, verified on both authoritative nameservers. No nameserver change is needed.
 
 | Type | Name / Host | Value |
 | --- | --- | --- |
@@ -52,6 +53,8 @@ Edit the authored files in `dist/`. If you add an asset, include it in `PUBLIC_F
 
 ```sh
 node --check dist/theme.js
+node --check dist/logo.js
+node --check dist/assets/logo-motion.js
 python3 scripts/build_pages.py
 python3 -m http.server 4173 --bind 127.0.0.1 --directory _site
 ```
