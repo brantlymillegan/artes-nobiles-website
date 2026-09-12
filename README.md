@@ -8,7 +8,7 @@ Run a local preview with `python3 -m http.server 4173 --bind 127.0.0.1 --directo
 
 The Christmas Story reading proof is reference material only and is not included in this project. The supplied cover is included. The displayed ROSARIUM screen is a fresh capture from the local Android build. The book's purchase link and release information can be added when available.
 
-The site is deployed on GitHub Pages with artesnobiles.com configured as its custom domain. GoDaddy DNS has been verified to point to GitHub Pages; HTTPS enforcement becomes available after the custom-domain certificate is issued.
+The site is deployed on GitHub Pages with artesnobiles.com configured as its custom domain. GoDaddy DNS has been verified to point to GitHub Pages. HTTPS is enabled for the apex and www domains, and HTTP/www requests redirect to https://artesnobiles.com/.
 
 The header uses the latest full-name SVG seals supplied in “Design company logo”, from `output/artes-nobiles-logos/animation-full-growth/`: black in light mode and white in dark mode, following the System / Light / Dark selection. All four SVGs and the supplied motion helper are copied unchanged. The artwork spells “Artes Nobiles” and includes the approved rounded joined vine base. The two-second animation plays once on page load, then settles into the matching static logo. Mouse hover, a tap/click, or keyboard focus replays it with a 240 ms crossfade from the static version. Repeated triggers during playback are ignored. Both theme variants stay synchronized, and reduced-motion preferences keep the logo still. Static images remain the fallback if JavaScript or animation loading fails. The footer and favicon are unchanged.
 

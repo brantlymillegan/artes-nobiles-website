@@ -10,7 +10,8 @@ Repository: [brantlymillegan/artes-nobiles-website](https://github.com/brantlymi
 - Initial [deployment succeeded](https://github.com/brantlymillegan/artes-nobiles-website/actions/runs/34707198525). The published HTML matched the local source exactly, and all 13 supporting website files returned HTTP 200.
 - Custom domain **artesnobiles.com** is saved in [Settings → Pages](https://github.com/brantlymillegan/artes-nobiles-website/settings/pages).
 - The apex and `www` DNS records were verified on both authoritative GoDaddy nameservers on September 12, 2026; GitHub also validates both domains as eligible for HTTPS.
-- **Remaining:** GitHub has not yet issued the custom-domain certificate. Enable **Enforce HTTPS** after certificate issuance.
+- **HTTPS enabled:** GitHub issued the certificate for `artesnobiles.com` and `www.artesnobiles.com` on September 12, 2026. **Enforce HTTPS** is on. Valid TLS and all four HTTP/HTTPS apex/www entry points were verified to serve or redirect to `https://artesnobiles.com/`, with HTML matching the deployed source.
+- Certificate provisioning required removing and immediately re-adding the same custom domain after DNS became valid. Some local DNS caches continued to return the old GoDaddy server after public resolvers updated; no further DNS-record edits are needed.
 
 Changes pushed to `master` deploy automatically. To redeploy manually, use **Actions → Deploy website to GitHub Pages → Run workflow** on `master`. Pushes to other branches do not publish.
 
