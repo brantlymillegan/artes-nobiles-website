@@ -15,6 +15,7 @@ PUBLIC_FILES = (
     "styles.css",
     "theme.js",
     "logo.js",
+    "favicon.ico",
     "CNAME",
     ".nojekyll",
     "assets/app-store-badge.svg",
