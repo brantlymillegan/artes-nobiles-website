@@ -2,19 +2,20 @@
 
 Repository: [brantlymillegan/artes-nobiles-website](https://github.com/brantlymillegan/artes-nobiles-website). The site uses GitHub Actions to publish the selected website files to GitHub Pages. The production domain is `artesnobiles.com`.
 
-## Repository setup
+## Deployment status
 
-1. Use the existing repository, **brantlymillegan/artes-nobiles-website**.
-2. Upload the prepared repository package, including the hidden `.github/` folder. It contains `dist/`, `scripts/build_pages.py`, `.github/workflows/pages.yml`, `.gitignore`, and these instructions. Keep the directory structure intact. The local `output/` and `.openai/` folders are not needed.
-3. In the repository, open **Settings → Pages → Build and deployment** and choose **GitHub Actions** as the source.
-4. In **Actions → Deploy website to GitHub Pages**, choose **Run workflow** on the default branch. Later pushes to the default branch deploy automatically. Pushes to other branches do not publish.
-5. In **Settings → Pages → Custom domain**, enter **artesnobiles.com** and save it **before changing DNS**.
+- Public repository created; local `origin` points to it.
+- Default branch: `master`.
+- Pages source: **GitHub Actions**.
+- Initial [deployment succeeded](https://github.com/brantlymillegan/artes-nobiles-website/actions/runs/34707198525). The published HTML matched the local source exactly, and all 13 supporting website files returned HTTP 200.
+- Custom domain **artesnobiles.com** is saved in [Settings → Pages](https://github.com/brantlymillegan/artes-nobiles-website/settings/pages).
+- **Remaining:** update GoDaddy DNS using the records below. GitHub cannot issue the custom-domain certificate yet; the HTTPS-enforcement request returned “The certificate does not exist yet.” Enable **Enforce HTTPS** after DNS validation and certificate issuance.
 
-Public repositories can use GitHub Pages on GitHub Free. Private repositories require a plan that supports Pages for private repositories. A private repository does not automatically make the resulting website private. [GitHub Pages availability](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+Changes pushed to `master` deploy automatically. To redeploy manually, use **Actions → Deploy website to GitHub Pages → Run workflow** on `master`. Pushes to other branches do not publish.
 
 The workflow validates the site, stages only the files listed in `PUBLIC_FILES` in `scripts/build_pages.py`, and publishes `_site/`. It uses the official GitHub Pages actions and the repository's built-in token. No hosting API key or separate server is required. The book PDF, design files, archived images, and unused fonts are excluded from the release.
 
-`dist/CNAME` records the intended domain, but GitHub Actions deployments do not use that file to configure the domain. The **Custom domain** setting in step 5 is still required. [GitHub custom-domain setup](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
+`dist/CNAME` records the intended domain, but GitHub Actions deployments do not use that file to configure the domain. The **Custom domain** setting is already saved on GitHub. [GitHub custom-domain setup](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
 
 ## DNS records
 

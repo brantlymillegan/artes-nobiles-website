@@ -8,7 +8,7 @@ Run a local preview with `python3 -m http.server 4173 --bind 127.0.0.1 --directo
 
 The Christmas Story reading proof is reference material only and is not included in this project. The supplied cover is included. The displayed ROSARIUM screen is a fresh capture from the local Android build. The book's purchase link and release information can be added when available.
 
-The production domain is artesnobiles.com. Its DNS must point to GitHub Pages as described in the setup guide.
+The site is deployed on GitHub Pages with artesnobiles.com configured as its custom domain. GoDaddy DNS must be updated as described in the setup guide; HTTPS enforcement becomes available after the custom-domain certificate is issued.
 
 The header uses the full-name SVG seals supplied in “Design company logo”: black in light mode and white in dark mode, following the System / Light / Dark selection. The original artwork is copied unchanged from `output/artes-nobilis-logos/full-name/`. The supplied artwork spells the name “Artes Nobilis”; the existing page text uses “Artes Nobiles” pending the user’s spelling clarification. The footer remains text and the initial favicon is unchanged.
 
@@ -17,7 +17,7 @@ Brand rules for this site:
 - Render the ROSARIUM wordmark with its official Noto Serif variable font: weight 720 and 0.18em letter spacing.
 - In every visible book title, set “The” smaller and italic, vertically centered to the left of “Christmas Story.”
 - Center “The” against the main letters’ bodies, excluding the long tail of the “y.” The shared title component uses a .744em alignment box and reserves .233em below for the descender, in both the navigation and book heading.
-- Match the cover’s exact typefaces: Big Caslon Medium for “Christmas Story” (tracking −0.018em) and Minion Variable Concept Italic for “The” (weight 400, optical size 21.22). The menu and book heading use outlined SVG glyphs from those actual font files, with accessible text, so rendering does not depend on installed fonts. Keep the existing website size ratios and vertical centering. Source measurements and the CoreText outline generator are in `output/christmas-title-fonts/`; no font files or book PDF are published.
+- Match the cover’s exact typefaces: Big Caslon Medium for “Christmas Story” (tracking −0.018em) and Minion Variable Concept Italic for “The” (weight 400, optical size 21.22). The menu and book heading use outlined SVG glyphs from those actual font files, with accessible text, so rendering does not depend on installed fonts. Keep the existing website size ratios and vertical centering. Source measurements and the CoreText outline generator are in `output/christmas-title-fonts/`; no cover font files or book PDF are published.
 - Show the app inside the actual Samsung Galaxy S26 device image, keeping the entire status bar within the screen corners.
 
 The Galaxy S26 photograph is the official Samsung base-model Front2 Black asset. The page layers the unchanged ROSARIUM screenshot over its screen and preserves the camera from the same source photograph.
