@@ -1,6 +1,8 @@
 # Artes Nobiles
 
-A simple, responsive, static website. The publishable website is in `dist/`.
+A simple, responsive, static website. The publishable website is in `dist/`. At desktop widths of 960px and above, each product’s copy is on the left and its image is on the right; smaller screens keep the stacked category, image, and details layout.
+
+Workflow preference: push completed website updates directly to `master` for immediate production deployment.
 
 Repository: [brantlymillegan/artes-nobiles-website](https://github.com/brantlymillegan/artes-nobiles-website). GitHub Actions deploys the default branch to GitHub Pages. See [GITHUB_PAGES.md](GITHUB_PAGES.md) for the exact DNS records for `artesnobiles.com` and HTTPS. Run `python3 scripts/build_pages.py` to validate and assemble the public release in `_site/`; the workflow publishes only those selected files.
 

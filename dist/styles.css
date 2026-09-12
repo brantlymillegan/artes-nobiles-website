@@ -192,6 +192,24 @@ nav a:hover { color: var(--brass); }
 .theme-trigger-symbol svg { animation: theme-arrive 200ms ease both; }
 @keyframes theme-arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
+@media (min-width: 960px) {
+  .product {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 1fr auto auto 1fr;
+    column-gap: clamp(40px, 5vw, 72px);
+    padding-block: 64px;
+    text-align: left;
+  }
+  .product-category { grid-column: 1; grid-row: 2; margin-bottom: 18px; }
+  .product-details { grid-column: 1; grid-row: 3; width: 100%; min-width: 0; margin: 0; }
+  .product-visual { grid-column: 2; grid-row: 1 / 5; align-self: center; margin: 0 auto; }
+  .rosarium-visual { height: clamp(430px, 36vw, 460px); }
+  .book-visual { width: 100%; }
+  .product-facts, .store-badges { justify-content: flex-start; }
+  .product-actions { align-items: flex-start; }
+}
+
 @media (max-width: 600px) {
   .container { width: 88%; }
   .site-header { padding-block: 48px 20px; }
