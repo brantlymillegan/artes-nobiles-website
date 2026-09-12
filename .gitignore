@@ -1,0 +1,18 @@
+.DS_Store
+*.log
+__pycache__/
+_site/
+output/
+.openai/
+.env
+.env.*
+*.pdf
+
+# Reference assets retained locally; not part of the website release.
+dist/assets/christmas-story-the.svg
+dist/assets/christmas-story-title.svg
+dist/assets/cormorant-italic.ttf
+dist/assets/cormorant-regular.ttf
+dist/assets/rosarium-android-2026-09-11.png
+dist/assets/rosarium-app.webp
+dist/assets/rosarium-icon.png
