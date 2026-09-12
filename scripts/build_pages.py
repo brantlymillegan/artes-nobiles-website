@@ -16,6 +16,7 @@ PUBLIC_FILES = (
     "theme.js",
     "logo.js",
     "favicon.ico",
+    "og.png",
     "CNAME",
     ".nojekyll",
     "assets/app-store-badge.svg",
@@ -48,6 +49,11 @@ class PageReferences(HTMLParser):
         for name in ("href", "src", "data-logo-src"):
             if attributes.get(name):
                 self.references.append(attributes[name])
+        if tag == "meta" and (attributes.get("property") or attributes.get("name")) in {
+            "og:image", "og:image:secure_url", "twitter:image"
+        }:
+            if attributes.get("content"):
+                self.references.append(attributes["content"])
 
 
 def build():
@@ -74,6 +80,10 @@ def build():
     for reference in references:
         url = urlsplit(reference)
         if url.scheme or url.netloc:
+            if url.scheme == "https" and url.netloc == "artesnobiles.com":
+                name = unquote(url.path).lstrip("/") or "index.html"
+                if name not in allowed:
+                    raise ValueError(f"Referenced site file is not in PUBLIC_FILES: {reference}")
             continue
         if url.path:
             name = unquote(url.path)
