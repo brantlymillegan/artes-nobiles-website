@@ -103,7 +103,7 @@ p, h1, h2 { margin: 0; }
 .company-logo .company-logo-dark { display: var(--logo-dark-display); }
 .wordmark { font-family: Georgia, "Times New Roman", serif; font-size: 2.55rem; font-weight: 700; letter-spacing: .13em; line-height: 1.35; }
 nav { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 25px; margin-top: 26px; }
-nav a { padding-block: 6px; transition: color .18s; }
+nav a { padding-block: 6px; transform-origin: center; transition: color .18s, transform .32s cubic-bezier(.2,.7,.2,1); }
 nav a:hover { color: var(--brass); }
 .nav-divider { width: 1px; height: 17px; background: var(--rule); }
 .rosarium-brand { font-family: "Noto Serif Rosarium", Georgia, serif; font-weight: 720; letter-spacing: .18em; text-transform: uppercase; }
@@ -152,16 +152,20 @@ nav a:hover { color: var(--brass); }
 .christmas-product { border-top: 1px solid var(--rule); padding-top: 44px; padding-bottom: 20px; }
 .book-visual { width: min(640px, 92%); margin-top: 30px; margin-bottom: 34px; }
 .book-cover { width: 100%; height: auto; box-shadow: 0 2px 3px #14221816, 0 15px 25px -14px #14221840; }
-.galaxy-device, .book-cover { transition: transform .32s cubic-bezier(.2,.7,.2,1), filter .32s ease, box-shadow .32s ease; }
+.rosarium-visual, .book-visual { transform-origin: center; transition: transform .32s cubic-bezier(.2,.7,.2,1); }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .google-play-badge:hover img { transform: translateY(-3px); }
-  .rosarium-visual:hover .galaxy-device { transform: translateY(-6px) rotate(-1.5deg); filter: drop-shadow(4px 12px 8px #18251f26); }
-  .book-visual:hover .book-cover { transform: translateY(-6px) rotate(.7deg); box-shadow: 0 3px 5px #14221816, 0 22px 32px -14px #14221850; }
+  .rosarium-visual:hover,
+  .book-visual:hover,
+  .nav-rosarium:hover,
+  .nav-book:hover { transform: scale(1.04); }
 }
 @media (prefers-reduced-motion: no-preference) {
   .google-play-badge:focus-visible img { transform: translateY(-3px); }
-  .rosarium-visual:focus-visible .galaxy-device { transform: translateY(-6px) rotate(-1.5deg); }
-  .book-visual:focus-visible .book-cover { transform: translateY(-6px) rotate(.7deg); }
+  .rosarium-visual:focus-visible,
+  .book-visual:focus-visible,
+  .nav-rosarium:focus-visible,
+  .nav-book:focus-visible { transform: scale(1.04); }
 }
 .book-title { font-size: clamp(2rem, 4.2vw, 2.85rem); }
 .book-detail { margin-top: 13px; color: var(--muted); font-size: .875rem; line-height: 1.8; }
