@@ -30,6 +30,8 @@
     <link rel="preload" href="assets/noto-serif-variable.ttf" as="font" type="font/ttf" crossorigin>
     <script src="theme.js?v=4"></script>
     <script type="module" src="logo.js?v=3"></script>
+    <script type="module" src="book-reader.js?v=1"></script>
+    <link rel="stylesheet" href="book-reader.css?v=1">
     <link rel="stylesheet" href="styles.css?v=23">
   </head>
   <body>
@@ -126,6 +128,26 @@
           <p class="book-status"><em>Coming soon</em></p>
         </div>
       </article>
+
+      <section class="book-reader" id="see-inside" aria-labelledby="reader-title" data-state="closed">
+        <h2 class="reader-heading" id="reader-title">See Inside</h2>
+        <p class="reader-hint" id="reader-hint">Click the cover to open the book.</p>
+        <div class="reader-stage" data-reader-interaction>
+          <button class="reader-cover" type="button" aria-label="Open The Christmas Story" aria-controls="reader-book" aria-expanded="false" disabled>
+            <img src="assets/christmas-story-cover.png?v=126" width="3300" height="2550" alt="The Christmas Story front cover" loading="lazy">
+          </button>
+          <div class="reader-flip" id="reader-book" role="group" aria-label="The Christmas Story, interactive book" aria-describedby="reader-hint" tabindex="-1" aria-hidden="true"></div>
+        </div>
+        <div class="reader-toolbar" data-reader-interaction hidden>
+          <button class="reader-control reader-previous" type="button" aria-label="Previous page"><span aria-hidden="true">←</span></button>
+          <p class="reader-position" role="status" aria-live="polite" aria-atomic="true"></p>
+          <button class="reader-control reader-next" type="button" aria-label="Next page"><span aria-hidden="true">→</span></button>
+          <button class="reader-control reader-close" type="button">Close book</button>
+        </div>
+        <p class="reader-error" role="alert" hidden></p>
+        <div class="reader-transcript visually-hidden"></div>
+        <noscript><p>Enable JavaScript to flip through the book.</p></noscript>
+      </section>
     </main>
 
     <footer class="site-footer container">

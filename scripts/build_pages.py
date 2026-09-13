@@ -3,6 +3,7 @@
 from html.parser import HTMLParser
 from pathlib import Path
 import re
+import json
 import shutil
 from urllib.parse import unquote, urlsplit
 import xml.etree.ElementTree as ET
@@ -15,6 +16,11 @@ PUBLIC_FILES = (
     "styles.css",
     "theme.js",
     "logo.js",
+    "book-reader.js",
+    "book-reader.css",
+    "assets/vendor/page-flip-2.0.7.js",
+    "assets/vendor/page-flip-LICENSE.txt",
+    "assets/book/126/manifest.json",
     "favicon.ico",
     "og.png",
     "CNAME",
@@ -34,6 +40,26 @@ PUBLIC_FILES = (
     "assets/rosarium-home-light.png",
     "assets/rosarium-home-dark.png",
 )
+
+
+BOOK_DIRECTORY = "assets/book/126/"
+book_manifest = json.loads((SOURCE / BOOK_DIRECTORY / "manifest.json").read_text())
+book_pages = book_manifest["pages"]
+if len(book_pages) != 56 or book_manifest["titlePageIndex"] != 4:
+    raise ValueError("The reader must include all 55 source pages plus the inside-back binding blank.")
+expected_book_order = [f"page-{i:03}.webp" for i in range(54)] + ["blank-inside-back.webp", "page-054.webp"]
+if [page["src"] for page in book_pages] != expected_book_order:
+    raise ValueError("Book pages must retain the complete source reading order.")
+book_assets = []
+for page in book_pages:
+    if not re.fullmatch(r"(?:page-\d{3}|blank-inside-back)\.webp", page["src"]):
+        raise ValueError(f"Unexpected public book asset: {page['src']}")
+    if not page.get("label") or page["width"] != 1600 or page["height"] != 1236:
+        raise ValueError("Book pages must have labels and preserve the rendered page dimensions.")
+    book_assets.append(BOOK_DIRECTORY + page["src"])
+if len(set(book_assets)) != len(book_assets):
+    raise ValueError("The reader must not repeat or omit source image files.")
+PUBLIC_FILES += tuple(book_assets)
 
 
 class PageReferences(HTMLParser):
@@ -75,7 +101,7 @@ def build():
     page = PageReferences()
     page.feed((SOURCE / "index.html").read_text())
     references = page.references + re.findall(
-        r"url\(\s*['\"]?([^\s)'\"]+)", (SOURCE / "styles.css").read_text()
+        r"url\(\s*['\"]?([^\s)'\"]+)", "\n".join((SOURCE / name).read_text() for name in ("styles.css", "book-reader.css"))
     )
     for reference in references:
         url = urlsplit(reference)
