@@ -163,7 +163,6 @@ p, h1, h2 { margin: 0; }
 .google-play-badge img { transition: transform .2s ease; }
 .app-store-availability { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 12px; }
 .app-store-badge { display: block; padding: 0; border: 0; border-radius: 6px; background: transparent; appearance: none; cursor: default; filter: grayscale(1); opacity: .45; }
-.store-status { color: var(--muted); font-size: .8125rem; line-height: 1.6; }
 .christmas-product { border-top: 1px solid var(--rule); padding-top: 44px; padding-bottom: 0; }
 .rosarium-visual { transform-origin: center; transition: transform .32s cubic-bezier(.2,.7,.2,1); }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
@@ -185,7 +184,8 @@ p, h1, h2 { margin: 0; }
 }
 .book-title { font-size: clamp(2rem, 4.2vw, 2.85rem); }
 .book-detail { margin-top: 13px; color: var(--muted); font-size: .875rem; line-height: 1.8; }
-.book-status { margin-top: 12px; font-size: .8125rem; letter-spacing: .14em; line-height: 1.6; color: var(--muted); }
+.store-status, .book-status { font-size: .8125rem; letter-spacing: .14em; line-height: 1.6; color: var(--muted); }
+.book-status { margin-top: 12px; }
 .site-footer { border-top: 1px solid var(--rule); margin-top: 38px; padding-block: 27px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
 .footer-wordmark { font-size: 1rem; letter-spacing: .1em; }
 .site-footer small { color: var(--muted); font-size: .75rem; }
