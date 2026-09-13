@@ -25,7 +25,7 @@ PUBLIC_FILES = (
     "assets/rosarium-video-poster-dark.png",
     "assets/vendor/page-flip-2.0.7.js",
     "assets/vendor/page-flip-LICENSE.txt",
-    "assets/book/126/manifest.json",
+    "assets/book/137/manifest.json",
     "favicon.ico",
     "og.png",
     "CNAME",
@@ -44,9 +44,11 @@ PUBLIC_FILES = (
 )
 
 
-BOOK_DIRECTORY = "assets/book/126/"
+BOOK_DIRECTORY = "assets/book/137/"
 book_manifest = json.loads((SOURCE / BOOK_DIRECTORY / "manifest.json").read_text())
 book_pages = book_manifest["pages"]
+if book_manifest["edition"] != "Draft 137 — Canonical":
+    raise ValueError("The reader must use the approved Canonical 137 edition.")
 if len(book_pages) != 56 or book_manifest["titlePageIndex"] != 4:
     raise ValueError("The reader must include all 55 source pages plus the inside-back binding blank.")
 expected_book_order = [f"page-{i:03}.webp" for i in range(54)] + ["blank-inside-back.webp", "page-054.webp"]
@@ -62,6 +64,11 @@ for page in book_pages:
 if len(set(book_assets)) != len(book_assets):
     raise ValueError("The reader must not repeat or omit source image files.")
 PUBLIC_FILES += tuple(book_assets)
+
+# Keep the previous edition's URLs valid for visitors with a reader already open.
+PUBLIC_FILES += ("assets/book/126/manifest.json",) + tuple(
+    "assets/book/126/" + page["src"] for page in book_pages
+)
 
 
 class PageReferences(HTMLParser):

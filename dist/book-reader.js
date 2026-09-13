@@ -13,7 +13,7 @@ if (reader) {
   const error = reader.querySelector('.reader-error');
   const transcript = reader.querySelector('.reader-transcript');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const assetRoot = new URL('./assets/book/126/', import.meta.url);
+  const assetRoot = new URL('./assets/book/137/', import.meta.url);
   let manifest, flip, initialized, operation = Promise.resolve();
   let generation = 0;
   let state = 'closed';
