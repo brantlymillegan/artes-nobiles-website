@@ -14,6 +14,7 @@
 }
 
 :root {
+  --navigation-height: 72px;
   --background: #f6f4ef;
   --ink: #202521;
   --muted: #626660;
@@ -80,7 +81,7 @@
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--navigation-height) + 16px); }
 body { margin: 0; background: var(--background); color: var(--ink); font-family: var(--sans); font-size: 1rem; -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--brass); outline-offset: 6px; }
@@ -88,7 +89,7 @@ img { display: block; max-width: 100%; height: auto; }
 p, h1, h2 { margin: 0; }
 ::selection { background: var(--selection); color: var(--ink); }
 .container { width: min(1100px, 88%); margin-inline: auto; }
-.site-header { position: relative; text-align: center; padding-block: 36px 24px; border-bottom: 1px solid var(--rule); }
+.site-header { position: relative; text-align: center; padding-block: 36px 12px; }
 .site-header h1 { font-size: inherit; font-weight: inherit; }
 .company-logo { position: relative; display: block; width: min(260px, 100%); aspect-ratio: 1; margin-inline: auto; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; appearance: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .company-logo-theme { position: absolute; inset: 0; }
@@ -102,9 +103,16 @@ p, h1, h2 { margin: 0; }
 .company-logo .company-logo-light { display: var(--logo-light-display); }
 .company-logo .company-logo-dark { display: var(--logo-dark-display); }
 .wordmark { font-family: Georgia, "Times New Roman", serif; font-size: 2.55rem; font-weight: 700; letter-spacing: .13em; line-height: 1.35; }
-nav { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 25px; margin-top: 26px; }
-nav a { padding-block: 6px; transform-origin: center; transition: color .18s, transform .32s cubic-bezier(.2,.7,.2,1); }
-nav a:hover { color: var(--brass); }
+/* Keep the bar outside the hero so it stays pinned through both products. */
+.nav-sentinel { height: 1px; margin-bottom: -1px; pointer-events: none; }
+.product-navigation { position: sticky; top: 0; z-index: 15; background: var(--background); }
+.product-nav-inner { position: relative; display: grid; grid-template-columns: 64px minmax(0, 1fr) 64px; align-items: center; min-height: 72px; border-bottom: 1px solid var(--rule); }
+.product-navigation.is-stuck { box-shadow: 0 1px 0 var(--rule); }
+.product-links { grid-column: 2; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 0 25px; padding-block: 12px; }
+.product-links a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 6px; transform-origin: center; transition: color .18s, transform .32s cubic-bezier(.2,.7,.2,1); }
+.product-links a:hover { color: var(--brass); }
+.company-logo.nav-logo { grid-column: 1; grid-row: 1; width: 60px; margin: 0; padding: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 240ms ease, visibility 240ms; }
+.product-navigation.is-stuck .nav-logo { opacity: 1; visibility: visible; pointer-events: auto; }
 .nav-divider { width: 1px; height: 17px; background: var(--rule); }
 .rosarium-brand { font-family: "Noto Serif Rosarium", Georgia, serif; font-weight: 720; letter-spacing: .18em; text-transform: uppercase; }
 .nav-rosarium { font-size: .875rem; }
@@ -212,10 +220,13 @@ nav a:hover { color: var(--brass); }
 
 @media (max-width: 600px) {
   .container { width: 88%; }
-  .site-header { padding-block: 48px 20px; }
+  .site-header { padding-block: 48px 8px; }
   .company-logo { width: min(240px, 100%); }
   .wordmark { font-size: clamp(1.9rem, 7vw, 2.4rem); }
-  nav { gap: 17px; margin-top: 22px; }
+  .product-nav-inner { width: calc(100% - 24px); grid-template-columns: 0 minmax(0, 1fr) 0; column-gap: 0; transition: grid-template-columns 240ms ease, column-gap 240ms ease; }
+  .product-navigation.is-stuck .product-nav-inner { grid-template-columns: 44px minmax(0, 1fr) 0; column-gap: 6px; }
+  .company-logo.nav-logo { width: 44px; }
+  .product-links { gap: 0 12px; }
   .nav-rosarium { font-size: .875rem; }
   .nav-book { font-size: 1rem; }
   .product { padding-top: 32px; padding-bottom: 38px; }
@@ -236,6 +247,7 @@ nav a:hover { color: var(--brass); }
   .theme-menu-options { right: 39px; }
 }
 @media (max-width: 400px) {
+  .product-links { column-gap: 6px; }
   .store-badges { gap: 16px; }
   .google-play-badge img, .app-store-badge img { height: 40px; }
 }
