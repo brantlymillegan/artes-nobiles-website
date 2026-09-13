@@ -108,6 +108,7 @@ p, h1, h2 { margin: 0; }
 .product-navigation { position: sticky; top: 0; z-index: 15; background: var(--background); }
 .product-nav-inner { position: relative; display: grid; grid-template-columns: 64px minmax(0, 1fr) 64px; align-items: center; min-height: 72px; border-bottom: 1px solid var(--rule); }
 .product-navigation.is-stuck { box-shadow: 0 1px 0 var(--rule); }
+.product-navigation.is-stuck .product-nav-inner { border-bottom-color: transparent; }
 .product-links { grid-column: 2; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 0 25px; padding-block: 12px; }
 .product-links a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 6px; transform-origin: center; transition: color .18s, transform .32s cubic-bezier(.2,.7,.2,1); }
 .product-links a:hover { color: var(--brass); }
