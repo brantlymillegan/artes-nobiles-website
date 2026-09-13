@@ -2,9 +2,11 @@ import { mountAnimatedLogo } from './assets/logo-motion.js';
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const heroLogo = document.querySelector('.site-header .company-logo');
+const pageTop = document.querySelector('#top');
 const navigation = document.querySelector('.product-navigation');
 const compactLogo = navigation?.querySelector('.nav-logo');
 const sentinel = document.querySelector('.nav-sentinel');
+let suppressHeroHover = false;
 
 function initializeLogo(logo, onLoad) {
   const controllers = [];
@@ -16,11 +18,10 @@ function initializeLogo(logo, onLoad) {
     logo.classList.remove('is-playing', 'is-initial');
   }
 
-  function play(initial = false, restart = false) {
+  function play(initial = false) {
     if (!ready || document.hidden || reducedMotion.matches) return;
-    if (logo.classList.contains('is-playing') && !restart) return;
+    if (logo.classList.contains('is-playing')) return;
     initialPending = false;
-    if (restart) controllers.forEach(controller => controller.stop());
     logo.classList.toggle('is-initial', initial);
     logo.classList.add('is-playing');
     // Both themes and all logo instances use the original, independently scoped SVGs.
@@ -29,7 +30,15 @@ function initializeLogo(logo, onLoad) {
   }
 
   logo.addEventListener('pointerenter', event => {
-    if (event.pointerType === 'mouse') play();
+    if (event.pointerType === 'mouse' && !(logo === heroLogo && suppressHeroHover)) play();
+  });
+  logo.addEventListener('pointermove', event => {
+    // Scrolling can move the logo beneath a stationary pointer. Only deliberate
+    // movement over it should restore hover playback after returning to the top.
+    if (logo === heroLogo && suppressHeroHover && event.pointerType === 'mouse' && (event.movementX || event.movementY)) {
+      suppressHeroHover = false;
+      play();
+    }
   });
   logo.addEventListener('click', () => play());
   logo.addEventListener('focusin', () => {
@@ -69,12 +78,11 @@ function initializeLogo(logo, onLoad) {
   }
 
   initialize();
-  return { play };
 }
 
-const logos = new Map([...document.querySelectorAll('.company-logo')].map(logo => [
-  logo, initializeLogo(logo, logo === heroLogo),
-]));
+document.querySelectorAll('.company-logo').forEach(logo => {
+  initializeLogo(logo, logo === heroLogo);
+});
 
 if (navigation && compactLogo && sentinel) {
   function updateStickyState() {
@@ -104,15 +112,46 @@ if (navigation && compactLogo && sentinel) {
   window.addEventListener('hashchange', updateStickyState);
   updateNavigationHeight();
 
+  let scrollFrame = 0;
+  function cancelReturnScroll() {
+    cancelAnimationFrame(scrollFrame);
+    scrollFrame = 0;
+  }
+
+  function scrollQuicklyToTop() {
+    cancelReturnScroll();
+    const startY = window.scrollY;
+    const startTime = performance.now();
+    const duration = 360;
+
+    function step(now) {
+      const progress = reducedMotion.matches ? 1 : Math.min(1, (now - startTime) / duration);
+      const remaining = (1 - progress) ** 3;
+      // Each step is immediate so the page's normal smooth-anchor CSS cannot interfere.
+      window.scrollTo({ top: startY * remaining, left: 0, behavior: 'instant' });
+      updateStickyState();
+      scrollFrame = progress < 1 ? requestAnimationFrame(step) : 0;
+    }
+    if (reducedMotion.matches) step(startTime + duration);
+    else scrollFrame = requestAnimationFrame(step);
+  }
+
+  // Let deliberate user scrolling interrupt the return animation.
+  window.addEventListener('wheel', cancelReturnScroll, { passive: true });
+  window.addEventListener('touchstart', cancelReturnScroll, { passive: true });
+  window.addEventListener('pagehide', cancelReturnScroll);
+  window.addEventListener('keydown', event => {
+    if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) cancelReturnScroll();
+  });
+
   compactLogo.addEventListener('click', event => {
     // Preserve normal open-in-new-tab and modified link clicks.
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
-    heroLogo?.focus({ preventScroll: true });
-    // Replay the full-size logo where it will remain visible after the immediate jump.
-    logos.get(heroLogo)?.play(false, true);
+    suppressHeroHover = true;
+    // Keep focus at the destination without triggering the large logo's focus animation.
+    pageTop?.focus({ preventScroll: true });
     if (window.location.hash !== '#top') window.history.pushState(null, '', '#top');
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    updateStickyState();
+    scrollQuicklyToTop();
   });
 }
