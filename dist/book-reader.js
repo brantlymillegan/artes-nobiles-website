@@ -91,10 +91,12 @@ if (reader) {
     return Promise.all(Array.from({ length: distance * 2 + 1 }, (_, n) => ensurePage(index + n - distance)));
   }
 
-  function syncLayout() {
+  function syncLayout(force = false) {
     const width = reader.clientWidth;
+    // Page content and mobile browser chrome can change height without resizing
+    // the book. Redrawing for those events disrupts an in-progress page turn.
+    if (width === readerWidth && force !== true) return;
     if (flip && flip.getState() !== 'read') {
-      if (width === readerWidth) return;
       // Complete the old spread before a width change switches page orientation.
       flip.getRender().finishAnimation();
       flipWaiter?.();
@@ -142,7 +144,7 @@ if (reader) {
         if (event.data === 'read' && flipWaiter) flipWaiter();
       });
       flip.loadFromHTML(pages);
-      syncLayout();
+      syncLayout(true);
       describePages();
     })().catch(cause => { initialized = null; throw cause; });
     return initialized;

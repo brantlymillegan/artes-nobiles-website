@@ -1,7 +1,9 @@
-.book-reader { margin-top: 24px; text-align: center; scroll-margin-top: 28px; }
+.book-reader { position: relative; margin-top: 24px; text-align: center; scroll-margin-top: 28px; overflow-anchor: none; }
 .reader-heading { font-family: "Noto Serif Rosarium", Georgia, serif; font-size: 1.125rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; line-height: 1.6; color: var(--ink); }
 .reader-hint { margin-top: 10px; min-height: 1.6em; color: var(--muted); font-size: .875rem; font-style: italic; line-height: 1.6; }
-.reader-stage { position: relative; width: 100%; aspect-ratio: 22 / 8.5; margin: 28px auto 18px; touch-action: pan-y pinch-zoom; }
+/* Rotating page shadows extend beyond the book. Keep their scrollable overflow
+   inside this fixed stage so each turn cannot grow or shrink the webpage. */
+.reader-stage { position: relative; width: 100%; aspect-ratio: 22 / 8.5; margin: 28px auto 18px; touch-action: pan-y pinch-zoom; contain: layout paint; overflow: clip; overflow-clip-margin: 24px; }
 .reader-portrait .reader-stage { aspect-ratio: 11 / 8.5; }
 .reader-cover { position: absolute; inset: 0; display: block; width: 50%; height: 100%; padding: 0; margin: auto; border: 0; background: transparent; cursor: pointer; transition: transform .32s cubic-bezier(.2,.7,.2,1), opacity 180ms ease, visibility 180ms; }
 .reader-portrait .reader-cover { width: 100%; }
