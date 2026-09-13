@@ -18,6 +18,11 @@ PUBLIC_FILES = (
     "logo.js",
     "book-reader.js",
     "book-reader.css",
+    "rosarium-video.js",
+    "assets/rosarium-demo-light-v6.mp4",
+    "assets/rosarium-demo-dark-v6.mp4",
+    "assets/rosarium-video-poster-light.png",
+    "assets/rosarium-video-poster-dark.png",
     "assets/vendor/page-flip-2.0.7.js",
     "assets/vendor/page-flip-LICENSE.txt",
     "assets/book/126/manifest.json",
@@ -35,10 +40,7 @@ PUBLIC_FILES = (
     "assets/dm-sans-regular.ttf",
     "assets/noto-serif-variable.ttf",
     "assets/favicon.svg",
-    "assets/galaxy-s26-front.png",
     "assets/google-play-badge.svg",
-    "assets/rosarium-home-light.png",
-    "assets/rosarium-home-dark.png",
 )
 
 
@@ -72,7 +74,7 @@ class PageReferences(HTMLParser):
         attributes = dict(attributes)
         if "id" in attributes:
             self.ids.add(attributes["id"])
-        for name in ("href", "src", "data-logo-src"):
+        for name in ("href", "src", "poster", "data-logo-src", "data-light-src", "data-dark-src"):
             if attributes.get(name):
                 self.references.append(attributes[name])
         if tag == "meta" and (attributes.get("property") or attributes.get("name")) in {

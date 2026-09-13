@@ -131,15 +131,19 @@ p, h1, h2 { margin: 0; }
 .product-category { font-size: .75rem; text-transform: uppercase; letter-spacing: .17em; line-height: 1.6; color: var(--muted); }
 .product-visual { position: relative; display: flex; align-items: center; justify-content: center; margin: 25px auto 32px; }
 .rosarium-visual { width: fit-content; height: 390px; max-width: 100%; }
-.galaxy-device { display: block; position: relative; height: 100%; aspect-ratio: 519 / 1073; flex: none; overflow: hidden; filter: drop-shadow(3px 7px 5px #18251f1a); }
-/* Original Samsung front photograph, cropped by its transparent outer bounds.
-   The app and camera remain unmodified source images; no synthetic device frame. */
-.device-photo { position: absolute; max-width: none; width: 385.356%; height: auto; left: -142.967%; top: -43.150%; pointer-events: none; }
-.device-display { position: absolute; display: block; left: 3.66%; top: 1.77%; width: 92.10%; height: 96.46%; overflow: hidden; border-radius: 8.368% / 3.865%; background: var(--screen-background); }
-.device-display img { width: 100%; height: 100%; object-fit: contain; }
-.device-display .app-screen-light { display: var(--app-light-display); }
-.device-display .app-screen-dark { display: var(--app-dark-display); }
-.device-camera { clip-path: circle(.70% at 49.975% 25.45%); }
+.rosarium-video-link { display: block; height: 100%; aspect-ratio: 519 / 1073; flex: none; filter: drop-shadow(3px 7px 5px #18251f1a); }
+.rosarium-video-frame { display: block; position: relative; width: 100%; height: 100%; overflow: hidden; mask-image: url("assets/rosarium-video-poster-light.png"); mask-size: 100.192678% 100.093197%; mask-repeat: no-repeat; mask-mode: alpha; }
+/* The original MP4 has 40px left and 63px top padding around the 519×1073
+   Samsung phone. Crop the export padding without changing the phone's height. */
+.rosarium-video { position: absolute; max-width: none; width: 115.606936%; height: 111.835974%; left: -7.707129%; top: -5.871389%; opacity: 0; pointer-events: none; }
+.rosarium-video.is-ready { opacity: 1; }
+.rosarium-video-poster { position: absolute; max-width: none; width: 100.192678%; height: 100.093197%; left: 0; top: 0; pointer-events: none; }
+.rosarium-video-poster.app-screen-light { display: var(--app-light-display); }
+.rosarium-video-poster.app-screen-dark { display: var(--app-dark-display); }
+.rosarium-playback { position: absolute; left: calc(100% + 10px); bottom: 0; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; border: 1px solid var(--rule); border-radius: 50%; background: var(--background); color: var(--muted); cursor: pointer; }
+.rosarium-playback[hidden], .rosarium-playback .video-play-icon, .rosarium-playback.is-paused .video-pause-icon { display: none; }
+.rosarium-playback.is-paused .video-play-icon { display: block; }
+.rosarium-playback:hover { background: var(--surface); color: var(--ink); }
 .product-details { width: min(540px, 100%); margin-inline: auto; }
 .rosarium-title { font-size: clamp(1.9rem, 4vw, 2.5rem); line-height: 1.3; }
 .product-description { margin-top: 17px; color: var(--muted); font-size: 1rem; line-height: 1.8; }
@@ -172,7 +176,7 @@ p, h1, h2 { margin: 0; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .google-play-badge:focus-visible img { transform: translateY(-3px); }
-  .rosarium-visual:focus-visible,
+  .rosarium-visual:focus-within,
   .book-visual:focus-visible,
   .nav-rosarium:focus-visible,
   .nav-book:focus-visible { transform: scale(1.04); }

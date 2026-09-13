@@ -31,8 +31,9 @@
     <script src="theme.js?v=4"></script>
     <script type="module" src="logo.js?v=3"></script>
     <script type="module" src="book-reader.js?v=2"></script>
+    <script type="module" src="rosarium-video.js?v=1"></script>
     <link rel="stylesheet" href="book-reader.css?v=4">
-    <link rel="stylesheet" href="styles.css?v=25">
+    <link rel="stylesheet" href="styles.css?v=26">
   </head>
   <body>
     <a class="skip-link" href="#our-work">Skip to our work</a>
@@ -82,16 +83,19 @@
     <main class="container" id="our-work">
       <article class="product rosarium-product" id="rosarium" aria-labelledby="rosarium-title">
         <p class="product-category">Prayer app</p>
-        <a class="product-visual rosarium-visual" href="https://rosariumprayer.com/" aria-label="Explore ROSARIUM, the Catholic prayer app">
-          <span class="galaxy-device" role="img" aria-label="ROSARIUM’s current Android devotion library, displayed in a Samsung Galaxy S26 mockup.">
-            <img class="device-photo" src="assets/galaxy-s26-front.png" width="2000" height="2000" alt="">
-            <span class="device-display">
-              <img class="app-screen-light" src="assets/rosarium-home-light.png" width="1080" height="2340" alt="">
-              <img class="app-screen-dark" src="assets/rosarium-home-dark.png" width="1080" height="2340" alt="">
+        <div class="product-visual rosarium-visual">
+          <a class="rosarium-video-link" href="https://rosariumprayer.com/" target="_blank" rel="noopener noreferrer" aria-label="Learn more about ROSARIUM (opens in a new tab)">
+            <span class="rosarium-video-frame">
+              <img class="rosarium-video-poster app-screen-light" src="assets/rosarium-video-poster-light.png" width="520" height="1074" alt="">
+              <img class="rosarium-video-poster app-screen-dark" src="assets/rosarium-video-poster-dark.png" width="520" height="1074" alt="">
+              <video class="rosarium-video" width="600" height="1200" autoplay muted loop playsinline preload="metadata" disablepictureinpicture aria-hidden="true" tabindex="-1" data-light-src="assets/rosarium-demo-light-v6.mp4" data-dark-src="assets/rosarium-demo-dark-v6.mp4"></video>
             </span>
-            <img class="device-photo device-camera" src="assets/galaxy-s26-front.png" width="2000" height="2000" alt="">
-          </span>
-        </a>
+          </a>
+          <button class="rosarium-playback" type="button" aria-label="Pause app preview" title="Pause app preview" hidden>
+            <svg class="video-pause-icon" width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M3 2h3v10H3zM8 2h3v10H8z"/></svg>
+            <svg class="video-play-icon" width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="m4 2 8 5-8 5z"/></svg>
+          </button>
+        </div>
         <div class="product-details">
           <h2 id="rosarium-title" class="rosarium-brand rosarium-title">ROSARIUM</h2>
           <p class="product-description">The Rosary, chaplets, novenas, and traditional Catholic prayers, with Scripture and sacred art.</p>
