@@ -36,3 +36,5 @@ Asset sources:
 - Samsung Galaxy S26: https://images.samsung.com/is/image/samsung/p6pim/us/s2602/gallery/us-galaxy-s26-s942-sm-s942uzkexaa-550995407?fmt=png-alpha&wid=2000&hei=2000
 
 The product navigation stays at the top once scrolled past. A compact, theme-matched logo fades in on its left and replays the same animation on mouse hover or activation. Activating it scrolls to the top in 360 ms without replaying the main logo; keyboard focus moves to the header. User scrolling interrupts the return, and reduced motion returns immediately. The compact logo is removed from the tab order while hidden, section anchors clear the sticky bar, and reduced motion preserves static logos.
+
+Both company logos scale to 104% on mouse hover and ease back to normal on pointer leave, independently of their SVG animation. This follows the existing product hover timing and respects reduced motion.

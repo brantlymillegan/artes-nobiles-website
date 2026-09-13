@@ -91,7 +91,7 @@ p, h1, h2 { margin: 0; }
 .container { width: min(1100px, 88%); margin-inline: auto; }
 .site-header { position: relative; text-align: center; padding-block: 36px 12px; }
 .site-header h1 { font-size: inherit; font-weight: inherit; }
-.company-logo { position: relative; display: block; width: min(260px, 100%); aspect-ratio: 1; margin-inline: auto; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; appearance: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.company-logo { position: relative; display: block; width: min(260px, 100%); aspect-ratio: 1; margin-inline: auto; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; appearance: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; transform-origin: center; transition: transform .32s cubic-bezier(.2,.7,.2,1); }
 .company-logo-theme { position: absolute; inset: 0; }
 .company-logo img, .company-logo-motion svg { width: 100%; height: auto; }
 .company-logo-static, .company-logo-motion { position: absolute; inset: 0; pointer-events: none; transition: opacity 240ms ease; }
@@ -111,7 +111,7 @@ p, h1, h2 { margin: 0; }
 .product-links { grid-column: 2; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 0 25px; padding-block: 12px; }
 .product-links a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 6px; transform-origin: center; transition: color .18s, transform .32s cubic-bezier(.2,.7,.2,1); }
 .product-links a:hover { color: var(--brass); }
-.company-logo.nav-logo { grid-column: 1; grid-row: 1; width: 60px; margin: 0; padding: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 240ms ease, visibility 240ms; }
+.company-logo.nav-logo { grid-column: 1; grid-row: 1; width: 60px; margin: 0; padding: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 240ms ease, visibility 240ms, transform .32s cubic-bezier(.2,.7,.2,1); }
 .product-navigation.is-stuck .nav-logo { opacity: 1; visibility: visible; pointer-events: auto; }
 .nav-divider { width: 1px; height: 17px; background: var(--rule); }
 .rosarium-brand { font-family: "Noto Serif Rosarium", Georgia, serif; font-weight: 720; letter-spacing: .18em; text-transform: uppercase; }
@@ -163,6 +163,7 @@ p, h1, h2 { margin: 0; }
 .rosarium-visual, .book-visual { transform-origin: center; transition: transform .32s cubic-bezier(.2,.7,.2,1); }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .google-play-badge:hover img { transform: translateY(-3px); }
+  .company-logo:hover,
   .rosarium-visual:hover,
   .book-visual:hover,
   .nav-rosarium:hover,
