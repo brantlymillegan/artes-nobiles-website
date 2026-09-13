@@ -154,7 +154,7 @@ p, h1, h2 { margin: 0; }
 .product-facts li::before { content: ""; flex: none; width: 6px; height: 10px; border: solid var(--check-green); border-width: 0 2px 2px 0; transform: translateY(-2px) rotate(45deg); }
 .product-facts li + li { border-left: 1px solid var(--rule); padding-left: 16px; }
 .product-actions { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 14px; margin-top: 26px; }
-.button { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; background: var(--ink); color: var(--button-text); min-height: 47px; padding: 12px 19px; border: 1px solid var(--ink); font-size: .875rem; line-height: 1.5; transition: background .18s; }
+.button { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; background: var(--ink); color: var(--button-text); min-height: 47px; padding: 12px 19px; border: 1px solid var(--ink); font-size: .875rem; line-height: 1.5; transform-origin: center; transition: background .18s, transform .32s cubic-bezier(.2,.7,.2,1); }
 .button:hover { background: var(--button-hover); }
 .button span { font-size: 1.05rem; }
 .google-play-badge { display: inline-block; flex: none; margin-block: 12px; border-radius: 6px; }
@@ -175,6 +175,7 @@ p, h1, h2 { margin: 0; }
   .book-visual:hover,
   .nav-rosarium:hover,
   .rosarium-title-link:hover,
+  .rosarium-product .button:hover,
   .nav-book:hover { transform: scale(1.04); }
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -183,6 +184,7 @@ p, h1, h2 { margin: 0; }
   .book-visual:focus-visible,
   .nav-rosarium:focus-visible,
   .rosarium-title-link:focus-visible,
+  .rosarium-product .button:focus-visible,
   .nav-book:focus-visible { transform: scale(1.04); }
 }
 .book-title { font-size: clamp(2rem, 4.2vw, 2.85rem); }
