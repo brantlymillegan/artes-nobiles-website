@@ -13,6 +13,7 @@ if (reader) {
   const error = reader.querySelector('.reader-error');
   const transcript = reader.querySelector('.reader-transcript');
   const product = reader.closest('.christmas-product');
+  const layout = product.querySelector('.christmas-layout');
   const desktop = matchMedia('(min-width: 960px)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const assetRoot = new URL('./assets/book/137/', import.meta.url);
@@ -25,24 +26,45 @@ if (reader) {
   let layoutMotion = null;
   const pageImages = [], pageLoads = new Map();
 
-  function finishLayoutMotion() {
-    if (!layoutMotion) return;
+  function finishLayoutMotion(preserveHeight = false) {
     const current = layoutMotion;
     layoutMotion = null;
-    current.animations.forEach(animation => animation.cancel());
-    current.image.remove();
-    trigger.style.removeProperty('visibility');
+    if (current) {
+      current.animations.forEach(animation => animation.cancel());
+      current.image.remove();
+      trigger.style.removeProperty('visibility');
+    }
+    if (preserveHeight !== true) product.style.removeProperty('height');
+  }
+
+  function holdProductHeight() {
+    if (desktop.matches && !reducedMotion.matches && trigger.animate) {
+      product.style.height = `${product.getBoundingClientRect().height}px`;
+    }
   }
 
   async function relocateBook(expanded) {
     const first = layoutMotion?.image.getBoundingClientRect() || trigger.getBoundingClientRect();
-    const copy = [...product.querySelectorAll(':scope > .product-category, :scope > .product-details')];
+    const firstHeight = product.getBoundingClientRect().height;
+    const copy = [...layout.querySelectorAll(':scope > .product-category, :scope > .product-details')];
     const copyBefore = copy.map(element => element.getBoundingClientRect());
-    finishLayoutMotion();
+    finishLayoutMotion(true);
+    if (desktop.matches && !reducedMotion.matches && trigger.animate) product.style.height = `${firstHeight}px`;
     product.dataset.readerExpanded = String(expanded);
     // Commit the final width once. The page engine never resizes frame by frame.
     syncLayout(true);
-    if (!desktop.matches || reducedMotion.matches || !trigger.animate) return;
+    if (!desktop.matches || reducedMotion.matches || !trigger.animate) {
+      product.style.removeProperty('height');
+      return;
+    }
+    // The inner grid takes its natural destination size while the outer article
+    // holds the page in place. Shrink the article over the same 480 ms as the
+    // cover return, rather than letting the browser clamp the scroll at once.
+    product.style.height = `${firstHeight}px`;
+    const productStyle = getComputedStyle(product);
+    const inset = ['paddingTop', 'paddingBottom', 'borderTopWidth', 'borderBottomWidth']
+      .reduce((total, property) => total + (parseFloat(productStyle[property]) || 0), 0);
+    const lastHeight = layout.getBoundingClientRect().height + inset;
     const last = trigger.getBoundingClientRect();
     const image = trigger.querySelector('img').cloneNode();
     image.alt = '';
@@ -69,7 +91,10 @@ if (reader) {
         { transform: 'none', transformOrigin: '0 0' },
       ], timing));
     });
-    const current = layoutMotion = { image, animations };
+    animations.push(product.animate([
+      { height: `${firstHeight}px` }, { height: `${lastHeight}px` },
+    ], { ...timing, fill: 'forwards' }));
+    const current = layoutMotion = { image, animations, top: last.top, scrollY: window.scrollY };
     await Promise.all(animations.map(animation => animation.finished.catch(() => {})));
     if (layoutMotion === current) finishLayoutMotion();
   }
@@ -148,7 +173,7 @@ if (reader) {
     // Page content and mobile browser chrome can change height without resizing
     // the book. Redrawing for those events disrupts an in-progress page turn.
     if (width === readerWidth && force !== true) return;
-    if (width !== readerWidth) finishLayoutMotion();
+    if (width !== readerWidth && force !== true) finishLayoutMotion();
     if (flip && flip.getState() !== 'read') {
       // Complete the old spread before a width change switches page orientation.
       flip.getRender().finishAnimation();
@@ -231,6 +256,7 @@ if (reader) {
   async function openBook() {
     if (state !== 'closed') return;
     const token = ++generation;
+    holdProductHeight();
     error.hidden = true;
     hint.textContent = 'Opening the book…';
     setState('opening');
@@ -266,6 +292,7 @@ if (reader) {
   }
 
   async function resetClosed(restoreFocus) {
+    holdProductHeight();
     reader.dataset.revealed = 'false';
     reader.dataset.cover = 'front';
     host.setAttribute('aria-hidden', 'true');
@@ -283,6 +310,7 @@ if (reader) {
   async function closeBook(restoreFocus = false) {
     if (state === 'closed' || state === 'closing') return;
     const token = ++generation;
+    holdProductHeight();
     if (reader.dataset.revealed !== 'true') { await resetClosed(restoreFocus); return; }
     setState('closing');
     hint.textContent = 'Closing the book…';
@@ -365,7 +393,11 @@ if (reader) {
     if (reducedMotion.matches && flip) { flip.getRender().finishAnimation(); flipWaiter?.(); }
   });
   window.addEventListener('resize', () => { finishLayoutMotion(); syncLayout(); }, { passive: true });
-  window.addEventListener('scroll', finishLayoutMotion, { passive: true });
+  window.addEventListener('scroll', () => {
+    if (layoutMotion) {
+      layoutMotion.image.style.top = `${layoutMotion.top + layoutMotion.scrollY - window.scrollY}px`;
+    }
+  }, { passive: true });
   if ('ResizeObserver' in window) new ResizeObserver(syncLayout).observe(reader);
   syncLayout();
 }
