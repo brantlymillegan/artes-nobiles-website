@@ -192,12 +192,11 @@ if (reader) {
         host.tabIndex = 0;
         host.focus({ preventScroll: true });
         await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-        while (token === generation && flip.getCurrentPageIndex() < spreadFor(manifest.titlePageIndex)) {
-          const current = flip.getCurrentPageIndex();
-          const target = flip.getOrientation() === 'portrait' ? current + 1 : current === 0 ? 1 : current + 2;
-          reader.dataset.cover = 'none';
-          await animateTo(target, token);
-        }
+        if (token !== generation) return;
+        // Open once to page 1; readers choose when to move further into the book.
+        const firstPage = manifest.pages.findIndex(page => page.printedPage === 1);
+        reader.dataset.cover = 'none';
+        await animateTo(Math.max(1, firstPage), token);
         if (token !== generation) return;
         setState('open');
         hint.textContent = flip.getOrientation() === 'portrait'
