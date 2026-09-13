@@ -1,9 +1,14 @@
-.book-reader { position: relative; margin-top: 24px; text-align: center; scroll-margin-top: 28px; overflow-anchor: none; }
-.reader-heading { font-family: "Noto Serif Rosarium", Georgia, serif; font-size: 1.125rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; line-height: 1.6; color: var(--ink); }
+.christmas-product { overflow-anchor: none; }
+.book-reader { position: relative; width: min(640px, 100%); min-width: 0; margin: 28px auto 34px; text-align: center; scroll-margin-top: 28px; overflow-anchor: none; }
+.reader-heading { display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 0 .5em; margin: 0; font-size: .875rem; font-weight: 400; line-height: 1.8; color: var(--ink); }
+.reader-heading-label { font-family: "Noto Serif Rosarium", Georgia, serif; font-weight: 500; letter-spacing: .18em; }
+.reader-invitation-text { color: var(--muted); font-style: italic; }
+.book-reader:not([data-state="closed"]) .reader-invitation { display: none; }
+.book-reader:not([data-revealed="true"]) .reader-hint { display: none; }
 .reader-hint { margin-top: 10px; min-height: 1.6em; color: var(--muted); font-size: .875rem; font-style: italic; line-height: 1.6; }
 /* Rotating page shadows extend beyond the book. Keep their scrollable overflow
    inside this fixed stage so each turn cannot grow or shrink the webpage. */
-.reader-stage { position: relative; width: 100%; aspect-ratio: 22 / 8.5; margin: 28px auto 18px; touch-action: pan-y pinch-zoom; contain: layout paint; overflow: clip; overflow-clip-margin: 24px; }
+.reader-stage { position: relative; width: 100%; aspect-ratio: 22 / 8.5; margin: 18px auto 0; touch-action: pan-y pinch-zoom; contain: layout paint; overflow: clip; overflow-clip-margin: 24px; }
 .reader-portrait .reader-stage { aspect-ratio: 11 / 8.5; }
 .reader-cover { position: absolute; inset: 0; display: block; width: 50%; height: 100%; padding: 0; margin: auto; border: 0; background: transparent; cursor: pointer; transition: transform .32s cubic-bezier(.2,.7,.2,1), opacity 180ms ease, visibility 180ms; }
 .reader-portrait .reader-cover { width: 100%; }
@@ -26,10 +31,20 @@
 .reader-previous, .reader-next { font-size: 1.2rem; }
 .reader-close { margin-left: 8px; }
 .reader-error { margin-top: 16px; color: var(--ink); font-size: .875rem; }
+@media (min-width: 960px) {
+  .christmas-product .book-reader { grid-column: 2; grid-row: 1 / 5; align-self: center; width: 100%; margin: 0; }
+  .christmas-product[data-reader-expanded="true"] { grid-template-rows: auto auto auto; }
+  .christmas-product[data-reader-expanded="true"] .product-category { grid-column: 1 / -1; grid-row: 1; text-align: center; }
+  .christmas-product[data-reader-expanded="true"] .product-details { grid-column: 1 / -1; grid-row: 2; width: min(640px, 100%); margin-inline: auto; text-align: center; }
+  .christmas-product[data-reader-expanded="true"] .book-reader { grid-column: 1 / -1; grid-row: 3; margin-top: 30px; }
+}
 @media (max-width: 600px) {
-  .reader-stage { margin-top: 22px; }
+  .book-reader { margin-block: 25px 28px; }
   .reader-toolbar { gap: 8px; }
   .reader-close { margin-left: 0; }
+}
+@media (max-width: 360px) {
+  .reader-heading { min-height: 3.6em; align-content: center; }
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .reader-cover:not(:disabled):hover { transform: scale(1.025); }

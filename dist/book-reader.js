@@ -12,6 +12,8 @@ if (reader) {
   const position = reader.querySelector('.reader-position');
   const error = reader.querySelector('.reader-error');
   const transcript = reader.querySelector('.reader-transcript');
+  const product = reader.closest('.christmas-product');
+  const desktop = matchMedia('(min-width: 960px)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const assetRoot = new URL('./assets/book/137/', import.meta.url);
   let manifest, flip, initialized, operation = Promise.resolve();
@@ -20,7 +22,57 @@ if (reader) {
   let turning = false;
   let readerWidth = 0;
   let flipWaiter = null;
+  let layoutMotion = null;
   const pageImages = [], pageLoads = new Map();
+
+  function finishLayoutMotion() {
+    if (!layoutMotion) return;
+    const current = layoutMotion;
+    layoutMotion = null;
+    current.animations.forEach(animation => animation.cancel());
+    current.image.remove();
+    trigger.style.removeProperty('visibility');
+  }
+
+  async function relocateBook(expanded) {
+    const first = layoutMotion?.image.getBoundingClientRect() || trigger.getBoundingClientRect();
+    const copy = [...product.querySelectorAll(':scope > .product-category, :scope > .product-details')];
+    const copyBefore = copy.map(element => element.getBoundingClientRect());
+    finishLayoutMotion();
+    product.dataset.readerExpanded = String(expanded);
+    // Commit the final width once. The page engine never resizes frame by frame.
+    syncLayout(true);
+    if (!desktop.matches || reducedMotion.matches || !trigger.animate) return;
+    const last = trigger.getBoundingClientRect();
+    const image = trigger.querySelector('img').cloneNode();
+    image.alt = '';
+    image.setAttribute('aria-hidden', 'true');
+    Object.assign(image.style, {
+      position: 'fixed', left: `${last.left}px`, top: `${last.top}px`,
+      width: `${last.width}px`, height: `${last.height}px`, maxWidth: 'none',
+      zIndex: '14', pointerEvents: 'none', transformOrigin: '0 0',
+      boxShadow: '0 2px 3px #14221816, 0 15px 25px -14px #14221840',
+    });
+    // A fixed cover can cross between the two layouts without escaping the
+    // reader's overflow containment or changing the document's scroll bounds.
+    document.body.append(image);
+    trigger.style.visibility = 'hidden';
+    const timing = { duration: 480, easing: 'cubic-bezier(.2,.7,.2,1)' };
+    const animations = [image.animate([
+      { transform: `translate(${first.left - last.left}px, ${first.top - last.top}px) scale(${first.width / last.width}, ${first.height / last.height})` },
+      { transform: 'none' },
+    ], timing)];
+    copy.forEach((element, index) => {
+      const before = copyBefore[index], after = element.getBoundingClientRect();
+      animations.push(element.animate([
+        { transform: `translate(${before.left - after.left}px, ${before.top - after.top}px) scale(${before.width / after.width}, ${before.height / after.height})`, transformOrigin: '0 0' },
+        { transform: 'none', transformOrigin: '0 0' },
+      ], timing));
+    });
+    const current = layoutMotion = { image, animations };
+    await Promise.all(animations.map(animation => animation.finished.catch(() => {})));
+    if (layoutMotion === current) finishLayoutMotion();
+  }
 
   function setState(value) {
     state = value;
@@ -28,7 +80,7 @@ if (reader) {
     trigger.setAttribute('aria-expanded', String(value !== 'closed'));
     trigger.disabled = value !== 'closed';
     reader.setAttribute('aria-busy', String(value === 'opening' || value === 'closing' || turning));
-    toolbar.hidden = value === 'closed';
+    toolbar.hidden = value === 'closed' || value === 'opening';
     updateControls();
   }
 
@@ -96,6 +148,7 @@ if (reader) {
     // Page content and mobile browser chrome can change height without resizing
     // the book. Redrawing for those events disrupts an in-progress page turn.
     if (width === readerWidth && force !== true) return;
+    if (width !== readerWidth) finishLayoutMotion();
     if (flip && flip.getState() !== 'read') {
       // Complete the old spread before a width change switches page orientation.
       flip.getRender().finishAnimation();
@@ -183,7 +236,7 @@ if (reader) {
     setState('opening');
     operation = (async () => {
       try {
-        await initialize();
+        await Promise.all([relocateBook(true), initialize()]);
         if (token !== generation) return;
         flip.turnToPage(0);
         reader.dataset.cover = 'front';
@@ -205,29 +258,32 @@ if (reader) {
         ensureAround(flip.getCurrentPageIndex(), 4).catch(() => {});
       } catch (cause) {
         if (token !== generation) return;
-        resetClosed(false);
+        await resetClosed(false);
         showError(cause);
       }
     })();
     await operation;
   }
 
-  function resetClosed(restoreFocus) {
+  async function resetClosed(restoreFocus) {
     reader.dataset.revealed = 'false';
     reader.dataset.cover = 'front';
     host.setAttribute('aria-hidden', 'true');
     host.tabIndex = -1;
     transcript.replaceChildren();
     turning = false;
+    setState('closing');
+    toolbar.hidden = true;
+    await relocateBook(false);
     setState('closed');
-    hint.textContent = 'Click the cover to open the book.';
+    hint.textContent = 'Click the cover to open';
     if (restoreFocus || host.contains(document.activeElement)) trigger.focus({ preventScroll: true });
   }
 
   async function closeBook(restoreFocus = false) {
     if (state === 'closed' || state === 'closing') return;
     const token = ++generation;
-    if (reader.dataset.revealed !== 'true') { resetClosed(restoreFocus); return; }
+    if (reader.dataset.revealed !== 'true') { await resetClosed(restoreFocus); return; }
     setState('closing');
     hint.textContent = 'Closing the book…';
     await operation;
@@ -238,7 +294,7 @@ if (reader) {
     } catch (cause) {
       showError(cause);
     } finally {
-      if (token === generation) resetClosed(restoreFocus);
+      if (token === generation) await resetClosed(restoreFocus);
     }
   }
 
@@ -305,9 +361,11 @@ if (reader) {
     }
   });
   reducedMotion.addEventListener('change', () => {
+    if (reducedMotion.matches) finishLayoutMotion();
     if (reducedMotion.matches && flip) { flip.getRender().finishAnimation(); flipWaiter?.(); }
   });
-  window.addEventListener('resize', syncLayout, { passive: true });
+  window.addEventListener('resize', () => { finishLayoutMotion(); syncLayout(); }, { passive: true });
+  window.addEventListener('scroll', finishLayoutMotion, { passive: true });
   if ('ResizeObserver' in window) new ResizeObserver(syncLayout).observe(reader);
   syncLayout();
 }

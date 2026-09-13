@@ -165,14 +165,11 @@ p, h1, h2 { margin: 0; }
 .app-store-badge { display: block; padding: 0; border: 0; border-radius: 6px; background: transparent; appearance: none; cursor: default; filter: grayscale(1); opacity: .45; }
 .store-status { color: var(--muted); font-size: .8125rem; line-height: 1.6; }
 .christmas-product { border-top: 1px solid var(--rule); padding-top: 44px; padding-bottom: 0; }
-.book-visual { width: min(640px, 92%); margin-top: 30px; margin-bottom: 34px; }
-.book-cover { width: 100%; height: auto; box-shadow: 0 2px 3px #14221816, 0 15px 25px -14px #14221840; }
-.rosarium-visual, .book-visual { transform-origin: center; transition: transform .32s cubic-bezier(.2,.7,.2,1); }
+.rosarium-visual { transform-origin: center; transition: transform .32s cubic-bezier(.2,.7,.2,1); }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .google-play-badge:hover img { transform: translateY(-3px); }
   .company-logo:hover,
   .rosarium-visual:hover,
-  .book-visual:hover,
   .nav-rosarium:hover,
   .rosarium-title-link:hover,
   .rosarium-product .button:hover,
@@ -181,7 +178,6 @@ p, h1, h2 { margin: 0; }
 @media (prefers-reduced-motion: no-preference) {
   .google-play-badge:focus-visible img { transform: translateY(-3px); }
   .rosarium-visual:focus-within,
-  .book-visual:focus-visible,
   .nav-rosarium:focus-visible,
   .rosarium-title-link:focus-visible,
   .rosarium-product .button:focus-visible,
@@ -226,7 +222,6 @@ p, h1, h2 { margin: 0; }
   .product-details { grid-column: 1; grid-row: 3; width: 100%; min-width: 0; margin: 0; }
   .product-visual { grid-column: 2; grid-row: 1 / 5; align-self: center; margin: 0 auto; }
   .rosarium-visual { height: clamp(430px, 36vw, 460px); }
-  .book-visual { width: 100%; }
   .product-facts, .store-badges { justify-content: flex-start; }
   .product-actions { align-items: flex-start; }
 }
@@ -250,7 +245,6 @@ p, h1, h2 { margin: 0; }
   .product-actions { margin-top: 24px; }
   .button { gap: 18px; padding-inline: 17px; }
   .christmas-product { padding-top: 34px; padding-bottom: 0; }
-  .book-visual { width: 100%; margin-block: 25px 28px; }
   .book-title { font-size: clamp(1.75rem, 6.8vw, 2.5rem); }
   .site-footer { margin-top: 30px; }
   .footer-wordmark { font-size: .9375rem; }
