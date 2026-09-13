@@ -158,7 +158,7 @@ p, h1, h2 { margin: 0; }
 .app-store-availability { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 12px; }
 .app-store-badge { display: block; padding: 0; border: 0; border-radius: 6px; background: transparent; appearance: none; cursor: default; filter: grayscale(1); opacity: .45; }
 .store-status { color: var(--muted); font-size: .8125rem; line-height: 1.6; }
-.christmas-product { border-top: 1px solid var(--rule); padding-top: 44px; padding-bottom: 20px; }
+.christmas-product { border-top: 1px solid var(--rule); padding-top: 44px; padding-bottom: 0; }
 .book-visual { width: min(640px, 92%); margin-top: 30px; margin-bottom: 34px; }
 .book-cover { width: 100%; height: auto; box-shadow: 0 2px 3px #14221816, 0 15px 25px -14px #14221840; }
 .rosarium-visual, .book-visual { transform-origin: center; transition: transform .32s cubic-bezier(.2,.7,.2,1); }
@@ -179,7 +179,7 @@ p, h1, h2 { margin: 0; }
 }
 .book-title { font-size: clamp(2rem, 4.2vw, 2.85rem); }
 .book-detail { margin-top: 13px; color: var(--muted); font-size: .875rem; line-height: 1.8; }
-.book-status { display: inline-block; margin-top: 25px; border-top: 1px solid var(--brass); padding: 14px 20px 0; font-size: .8125rem; color: var(--muted); }
+.book-status { margin-top: 12px; font-size: .8125rem; letter-spacing: .14em; line-height: 1.6; color: var(--muted); }
 .site-footer { border-top: 1px solid var(--rule); margin-top: 38px; padding-block: 27px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
 .footer-wordmark { font-size: 1rem; letter-spacing: .1em; }
 .site-footer small { color: var(--muted); font-size: .75rem; }
@@ -212,6 +212,7 @@ p, h1, h2 { margin: 0; }
     text-align: left;
   }
   .product-category { grid-column: 1; grid-row: 2; margin-bottom: 18px; }
+  .christmas-product { padding-bottom: 0; }
   .product-details { grid-column: 1; grid-row: 3; width: 100%; min-width: 0; margin: 0; }
   .product-visual { grid-column: 2; grid-row: 1 / 5; align-self: center; margin: 0 auto; }
   .rosarium-visual { height: clamp(430px, 36vw, 460px); }
@@ -238,7 +239,7 @@ p, h1, h2 { margin: 0; }
   .product-facts li + li { padding-left: 12px; }
   .product-actions { margin-top: 24px; }
   .button { gap: 18px; padding-inline: 17px; }
-  .christmas-product { padding-top: 34px; padding-bottom: 10px; }
+  .christmas-product { padding-top: 34px; padding-bottom: 0; }
   .book-visual { width: 100%; margin-block: 25px 28px; }
   .book-title { font-size: clamp(1.75rem, 6.8vw, 2.5rem); }
   .site-footer { margin-top: 30px; }

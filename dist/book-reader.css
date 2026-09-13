@@ -1,5 +1,5 @@
-.book-reader { margin-top: 38px; padding-top: 36px; text-align: center; scroll-margin-top: 28px; }
-.reader-heading { font-family: var(--sans); font-size: .875rem; font-weight: 400; letter-spacing: .15em; text-transform: uppercase; line-height: 1.6; color: var(--muted); }
+.book-reader { margin-top: 24px; text-align: center; scroll-margin-top: 28px; }
+.reader-heading { font-family: "Noto Serif Rosarium", Georgia, serif; font-size: 1.125rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; line-height: 1.6; color: var(--ink); }
 .reader-hint { margin-top: 10px; min-height: 1.6em; color: var(--muted); font-size: .875rem; font-style: italic; line-height: 1.6; }
 .reader-stage { position: relative; width: 100%; aspect-ratio: 22 / 8.5; margin: 28px auto 18px; touch-action: pan-y pinch-zoom; }
 .reader-portrait .reader-stage { aspect-ratio: 11 / 8.5; }
@@ -25,7 +25,6 @@
 .reader-close { margin-left: 8px; }
 .reader-error { margin-top: 16px; color: var(--ink); font-size: .875rem; }
 @media (max-width: 600px) {
-  .book-reader { margin-top: 26px; padding-top: 28px; }
   .reader-stage { margin-top: 22px; }
   .reader-toolbar { gap: 8px; }
   .reader-close { margin-left: 0; }
