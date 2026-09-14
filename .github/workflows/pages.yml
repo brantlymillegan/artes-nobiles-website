@@ -33,6 +33,7 @@ jobs:
           node --check dist/book-reader.js
           node --check dist/rosarium-video.js
           node --check dist/thechristmasstory/book-film.js
+          node --check dist/thechristmasstory/book-navigation.js
           node --check dist/assets/vendor/page-flip-2.0.7.js
           node --check dist/assets/logo-motion.js
           python3 scripts/build_pages.py

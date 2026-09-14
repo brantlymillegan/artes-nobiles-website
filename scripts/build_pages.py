@@ -16,6 +16,7 @@ PUBLIC_FILES = (
     "thechristmasstory/index.html",
     "thechristmasstory/book-page.css",
     "thechristmasstory/book-film.js",
+    "thechristmasstory/book-navigation.js",
     "styles.css",
     "theme.js",
     "logo.js",

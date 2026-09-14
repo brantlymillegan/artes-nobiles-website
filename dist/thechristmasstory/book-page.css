@@ -3,8 +3,11 @@
 .book-site-header { position: sticky; top: 0; z-index: 15; padding: 0; background: var(--background); border-bottom: 1px solid var(--rule); }
 .book-site-header .product-nav-inner { width: min(1280px, 92%); min-height: 84px; grid-template-columns: 72px minmax(0, 1fr) 72px; }
 .book-site-header .company-logo { width: 64px; margin: 0; }
-.book-site-header .theme-toggle { grid-column: 3; grid-row: 1; justify-self: end; }
 .book-site-header .product-navigation { box-shadow: none; }
+.book-appearance { position: fixed; top: 24px; right: max(4vw, calc((100vw - 1280px) / 2)); z-index: 16; width: auto; margin: 0; }
+.mobile-menu-toggle { display: none; }
+.menu-bars { display: flex; flex-direction: column; gap: 5px; width: 22px; }
+.menu-bars span { display: block; width: 100%; height: 1.5px; border-radius: 1px; background: currentColor; }
 .book-introduction { padding-top: clamp(48px, 6vw, 84px); text-align: center; }
 .eyebrow { font-size: .7rem; font-weight: 400; line-height: 1.7; letter-spacing: .2em; text-transform: uppercase; color: var(--brass); }
 .showcase-title { margin: 22px 0 0; font-size: clamp(2.25rem, 6.5vw, 5.75rem); }
@@ -46,9 +49,21 @@
 @media (max-width: 719px) {
   .book-page { --navigation-height: 72px; }
   .book-container { width: 90%; }
-  .book-site-header .product-nav-inner { width: 94%; min-height: 72px; grid-template-columns: 44px minmax(0, 1fr) 36px; column-gap: 8px; }
+  .book-site-header .product-navigation .product-nav-inner { width: 94%; min-height: 72px; grid-template-columns: 44px minmax(0, 1fr); column-gap: 8px; }
   .book-site-header .company-logo { width: 44px; }
+  .book-appearance { position: static; width: auto; min-height: 44px; margin: 0; padding: 8px; display: flex; justify-content: flex-start; border-top: 1px solid var(--rule); }
+  .book-appearance .theme-toggle { flex-direction: row; }
+  .book-appearance .theme-menu-options { right: auto; left: 43px; flex-direction: row; transform: translateX(-5px); }
+  .book-appearance .theme-toggle.is-open .theme-menu-options { transform: translateX(0); }
+  .book-appearance .theme-menu-options::after { right: auto; left: -10px; }
   .book-introduction { padding-top: 44px; }
+  .book-site-header.has-menu .mobile-menu-toggle { display: inline-flex; align-items: center; justify-content: center; grid-column: 2; grid-row: 1; justify-self: end; width: 44px; height: 44px; padding: 0; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+  .book-site-header .mobile-menu-toggle[hidden] { display: none; }
+  .mobile-menu-toggle:hover { color: var(--brass); }
+  .book-site-header.has-menu .product-links { position: absolute; top: calc(100% + 1px); right: 0; width: min(280px, calc(100vw - 24px)); display: flex; flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 8px; padding: 16px; border: 1px solid var(--rule); border-radius: 3px; background: var(--background); box-shadow: 0 12px 26px -14px #00000066; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-4px); transition: opacity 160ms ease, visibility 160ms ease, transform 160ms ease; }
+  .book-site-header.has-menu .mobile-menu-toggle[aria-expanded="true"] + .product-links { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+  .book-site-header.has-menu .product-links a { justify-content: flex-start; min-height: 44px; padding-inline: 8px; }
+  .book-site-header.has-menu .nav-divider { width: 100%; height: 1px; }
   .showcase-title { font-size: clamp(2.25rem, 10.3vw, 4.5rem); margin-top: 18px; }
   .book-lede { max-width: 460px; margin-top: 24px; }
   .book-page .reader-presentation { padding-top: 32px; }
@@ -72,11 +87,4 @@
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .text-link:hover { transform: scale(1.04); }
-}
-@media (max-width: 539px) {
-  .book-site-header .product-links { flex-direction: column; gap: 0; padding-block: 6px; }
-  .book-site-header .product-links a { min-height: 28px; padding-block: 2px; }
-  .book-site-header .nav-rosarium { font-size: .75rem; }
-  .book-site-header .nav-book { font-size: 1rem; }
-  .book-site-header .nav-divider { display: none; }
 }
