@@ -136,6 +136,11 @@ if (reader) {
 
   function describePages() {
     if (!flip || !manifest) return;
+    if (state === 'open') {
+      hint.textContent = flip.getOrientation() === 'portrait'
+        ? 'Tap the left third to go back, or the right two-thirds to go forward. Pinch to zoom. Tap outside to close.'
+        : 'Click the left page to go back, or the right page to go forward. Click outside to close.';
+    }
     const indices = visibleIndices();
     const current = flip.getCurrentPageIndex();
     reader.dataset.cover = current === 0 ? 'front' : current === manifest.pages.length - 1 ? 'back' : 'none';
@@ -284,9 +289,7 @@ if (reader) {
         await animateTo(Math.max(1, firstPage), token);
         if (token !== generation) return;
         setState('open');
-        hint.textContent = flip.getOrientation() === 'portrait'
-          ? 'Tap either side to turn a page. Pinch to zoom. Tap outside to close.'
-          : 'Click the left page to go back, or the right page to go forward. Click outside to close.';
+        describePages();
         ensureAround(flip.getCurrentPageIndex(), 4).catch(() => {});
       } catch (cause) {
         if (token !== generation) return;
@@ -364,15 +367,17 @@ if (reader) {
     const bounds = flip.getBoundsRect(), hostBox = host.getBoundingClientRect();
     let left = hostBox.left + bounds.left, right = left + bounds.width;
     const index = flip.getCurrentPageIndex();
-    if (flip.getOrientation() === 'portrait' || index === 0) left += bounds.pageWidth;
+    const portrait = flip.getOrientation() === 'portrait';
+    if (portrait || index === 0) left += bounds.pageWidth;
     else if (index === manifest.pages.length - 1) right -= bounds.pageWidth;
     const top = hostBox.top + bounds.top;
     if (event.clientX < left || event.clientX > right || event.clientY < top || event.clientY > top + bounds.height) {
       closeBook(); return;
     }
     if (state === 'open' && !turning) {
-      const backCover = flip.getOrientation() === 'landscape' && index === manifest.pages.length - 1;
-      turn(backCover || event.clientX < (left + right) / 2 ? -1 : 1);
+      const backCover = !portrait && index === manifest.pages.length - 1;
+      const backBoundary = left + (right - left) * (portrait ? 1 / 3 : 1 / 2);
+      turn(backCover || event.clientX < backBoundary ? -1 : 1);
     }
   }
 
