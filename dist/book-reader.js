@@ -16,6 +16,7 @@ if (reader) {
   const layout = product.querySelector('.christmas-layout');
   const desktop = matchMedia('(min-width: 960px)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const fixedLayout = reader.dataset.readerLayout === 'fixed';
   const assetRoot = new URL('./assets/book/152/', import.meta.url);
   let manifest, flip, initialized, operation = Promise.resolve();
   let generation = 0;
@@ -38,12 +39,17 @@ if (reader) {
   }
 
   function holdProductHeight() {
-    if (desktop.matches && !reducedMotion.matches && trigger.animate) {
+    if (!fixedLayout && desktop.matches && !reducedMotion.matches && trigger.animate) {
       product.style.height = `${product.getBoundingClientRect().height}px`;
     }
   }
 
   async function relocateBook(expanded) {
+    if (fixedLayout) {
+      product.dataset.readerExpanded = String(expanded);
+      syncLayout(true);
+      return;
+    }
     const first = layoutMotion?.image.getBoundingClientRect() || trigger.getBoundingClientRect();
     const firstHeight = product.getBoundingClientRect().height;
     const copy = [...layout.querySelectorAll(':scope > .product-category, :scope > .product-details')];

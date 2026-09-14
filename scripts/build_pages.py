@@ -5,7 +5,7 @@ from pathlib import Path
 import re
 import json
 import shutil
-from urllib.parse import unquote, urlsplit
+from urllib.parse import unquote, urljoin, urlsplit
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,6 +13,9 @@ SOURCE = ROOT / "dist"
 DESTINATION = ROOT / "_site"
 PUBLIC_FILES = (
     "index.html",
+    "thechristmasstory/index.html",
+    "thechristmasstory/book-page.css",
+    "thechristmasstory/book-film.js",
     "styles.css",
     "theme.js",
     "logo.js",
@@ -26,6 +29,10 @@ PUBLIC_FILES = (
     "assets/vendor/page-flip-2.0.7.js",
     "assets/vendor/page-flip-LICENSE.txt",
     "assets/book/152/manifest.json",
+    "assets/book/film-152/light.mp4",
+    "assets/book/film-152/dark.mp4",
+    "assets/book/film-152/poster-light.jpg",
+    "assets/book/film-152/poster-dark.jpg",
     "favicon.ico",
     "og.png",
     "CNAME",
@@ -86,7 +93,7 @@ class PageReferences(HTMLParser):
         attributes = dict(attributes)
         if "id" in attributes:
             self.ids.add(attributes["id"])
-        for name in ("href", "src", "poster", "data-logo-src", "data-light-src", "data-dark-src"):
+        for name in ("href", "src", "poster", "data-logo-src", "data-light-src", "data-dark-src", "data-light-poster", "data-dark-poster"):
             if attributes.get(name):
                 self.references.append(attributes[name])
         if tag == "meta" and (attributes.get("property") or attributes.get("name")) in {
@@ -112,25 +119,33 @@ def build():
     if (SOURCE / "CNAME").read_text().strip() != "artesnobiles.com":
         raise ValueError("The production domain must be artesnobiles.com.")
 
-    page = PageReferences()
-    page.feed((SOURCE / "index.html").read_text())
-    references = page.references + re.findall(
-        r"url\(\s*['\"]?([^\s)'\"]+)", "\n".join((SOURCE / name).read_text() for name in ("styles.css", "book-reader.css"))
-    )
-    for reference in references:
-        url = urlsplit(reference)
-        if url.scheme or url.netloc:
-            if url.scheme == "https" and url.netloc == "artesnobiles.com":
-                name = unquote(url.path).lstrip("/") or "index.html"
-                if name not in allowed:
-                    raise ValueError(f"Referenced site file is not in PUBLIC_FILES: {reference}")
+    documents = {}
+    references = []
+    for name in PUBLIC_FILES:
+        if name.endswith(".html"):
+            page = PageReferences()
+            page.feed((SOURCE / name).read_text())
+            documents[name] = page
+            references.extend((name, reference) for reference in page.references)
+        elif name.endswith(".css"):
+            references.extend((name, reference) for reference in re.findall(
+                r"url\(\s*['\"]?([^\s)'\"]+)", (SOURCE / name).read_text()
+            ))
+
+    for origin, reference in references:
+        url = urlsplit(urljoin("https://artesnobiles.com/" + origin, reference))
+        if url.scheme != "https" or url.netloc != "artesnobiles.com":
             continue
-        if url.path:
-            name = unquote(url.path)
-            if name not in allowed:
-                raise ValueError(f"Referenced asset is not in PUBLIC_FILES: {reference}")
-        elif url.fragment and unquote(url.fragment) not in page.ids:
-            raise ValueError(f"Broken page anchor: {reference}")
+        name = unquote(url.path).lstrip("/")
+        # GitHub Pages serves directory index routes with or without a trailing slash.
+        if not name or name.endswith("/"):
+            name += "index.html"
+        elif name not in allowed and name + "/index.html" in allowed:
+            name += "/index.html"
+        if name not in allowed:
+            raise ValueError(f"Referenced asset is not in PUBLIC_FILES: {origin}: {reference}")
+        if url.fragment and name in documents and unquote(url.fragment) not in documents[name].ids:
+            raise ValueError(f"Broken page anchor: {origin}: {reference}")
 
     if DESTINATION.is_symlink():
         raise ValueError("The staging directory must not be a symlink.")
