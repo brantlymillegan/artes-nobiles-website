@@ -16,7 +16,7 @@ if (reader) {
   const layout = product.querySelector('.christmas-layout');
   const desktop = matchMedia('(min-width: 960px)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const assetRoot = new URL('./assets/book/137/', import.meta.url);
+  const assetRoot = new URL('./assets/book/152/', import.meta.url);
   let manifest, flip, initialized, operation = Promise.resolve();
   let generation = 0;
   let state = 'closed';

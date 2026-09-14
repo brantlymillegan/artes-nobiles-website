@@ -25,7 +25,7 @@ PUBLIC_FILES = (
     "assets/rosarium-video-poster-dark.png",
     "assets/vendor/page-flip-2.0.7.js",
     "assets/vendor/page-flip-LICENSE.txt",
-    "assets/book/137/manifest.json",
+    "assets/book/152/manifest.json",
     "favicon.ico",
     "og.png",
     "CNAME",
@@ -44,16 +44,20 @@ PUBLIC_FILES = (
 )
 
 
-BOOK_DIRECTORY = "assets/book/137/"
+BOOK_DIRECTORY = "assets/book/152/"
 book_manifest = json.loads((SOURCE / BOOK_DIRECTORY / "manifest.json").read_text())
 book_pages = book_manifest["pages"]
-if book_manifest["edition"] != "Draft 137 — Canonical":
-    raise ValueError("The reader must use the approved Canonical 137 edition.")
-if len(book_pages) != 56 or book_manifest["titlePageIndex"] != 4:
-    raise ValueError("The reader must include all 55 source pages plus the inside-back binding blank.")
-expected_book_order = [f"page-{i:03}.webp" for i in range(54)] + ["blank-inside-back.webp", "page-054.webp"]
+if book_manifest["edition"] != "Draft 152 — Canonical":
+    raise ValueError("The reader must use the approved Canonical 152 edition.")
+if len(book_pages) != 60 or book_manifest["titlePageIndex"] != 6:
+    raise ValueError("The reader must include all 52 printed pages, six endpaper faces, and both covers.")
+expected_book_order = [f"page-{i:03}.webp" for i in range(60)]
 if [page["src"] for page in book_pages] != expected_book_order:
     raise ValueError("Book pages must retain the complete source reading order.")
+if [page.get("printedPage") for page in book_pages[4:56]] != list(range(1, 53)):
+    raise ValueError("All 52 printed pages must be present in sequence.")
+if [page["index"] for page in book_pages if page["density"] == "hard"] != [0, 59]:
+    raise ValueError("Only the front and back covers should be hard pages.")
 book_assets = []
 for page in book_pages:
     if not re.fullmatch(r"(?:page-\d{3}|blank-inside-back)\.webp", page["src"]):
@@ -65,10 +69,11 @@ if len(set(book_assets)) != len(book_assets):
     raise ValueError("The reader must not repeat or omit source image files.")
 PUBLIC_FILES += tuple(book_assets)
 
-# Keep the previous edition's URLs valid for visitors with a reader already open.
-PUBLIC_FILES += ("assets/book/126/manifest.json",) + tuple(
-    "assets/book/126/" + page["src"] for page in book_pages
-)
+# Keep earlier editions' URLs valid for visitors with a reader already open.
+for edition in (126, 137):
+    directory = f"assets/book/{edition}/"
+    previous_pages = json.loads((SOURCE / directory / "manifest.json").read_text())["pages"]
+    PUBLIC_FILES += (directory + "manifest.json",) + tuple(directory + page["src"] for page in previous_pages)
 
 
 class PageReferences(HTMLParser):
