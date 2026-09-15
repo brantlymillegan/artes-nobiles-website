@@ -26,6 +26,7 @@
 .book-page .reader-presentation { padding: 0; border-top: 0; margin-top: clamp(72px, 9vw, 124px); }
 .book-page .reader-presentation .christmas-layout { display: block; }
 .book-page .reader-presentation .book-reader { width: 100%; margin: 0; }
+.book-page .reader-eyebrow { margin-bottom: 12px; text-align: left; }
 .book-page .reader-heading { display: block; min-height: 0; text-align: left; font-family: "Noto Serif Rosarium", Georgia, serif; font-size: clamp(1.7rem, 3vw, 2.75rem); line-height: 1.3; font-weight: 450; letter-spacing: -.04em; }
 .book-page .reader-invitation-text { margin-top: 12px; min-height: 1.6em; font-size: .875rem; line-height: 1.6; text-align: left; }
 .book-page .book-reader:not([data-state="closed"]) .reader-invitation-text { display: block; visibility: hidden; }
