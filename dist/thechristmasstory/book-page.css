@@ -20,6 +20,9 @@
 .mobile-menu-toggle[aria-expanded="true"] .menu-bars span:last-child { transform: translateY(0) rotate(-45deg); }
 .book-introduction { padding-top: clamp(48px, 6vw, 84px); text-align: center; }
 .eyebrow { font-size: .7rem; font-weight: 400; line-height: 1.7; letter-spacing: .2em; text-transform: uppercase; color: var(--brass); }
+.book-page :is(.eyebrow, .spread-caption h3)::before { content: ""; display: block; width: 32px; height: 32px; margin-bottom: 12px; background: url("/assets/book/title-star.svg") center / contain no-repeat; }
+.book-introduction > .eyebrow::before { margin-inline: auto; }
+.book-page .spread-caption h3::before { width: 24px; height: 24px; margin-bottom: 10px; }
 .showcase-title { margin: 22px 0 0; font-size: clamp(2.25rem, 6.5vw, 5.75rem); }
 .book-introduction .book-status { margin-top: 18px; }
 .book-lede { max-width: 600px; margin: 28px auto 0; font-size: clamp(1rem, 1.45vw, 1.125rem); line-height: 1.8; color: var(--muted); text-wrap: pretty; }
@@ -52,7 +55,7 @@
 .film-error { padding: 16px 0; font-size: .875rem; color: var(--muted); }
 .sample-spread { margin: 0; }
 .spread-caption { display: grid; grid-template-columns: 36px 1fr minmax(200px, 36%); align-items: start; gap: 16px; padding: 0 0 24px; }
-.spread-number { color: var(--brass); font-size: .6875rem; letter-spacing: .1em; padding-top: 7px; }
+.spread-number { color: var(--brass); font-size: .6875rem; letter-spacing: .1em; padding-top: 41px; }
 .spread-caption h3 { margin: 0; font-family: "Noto Serif Rosarium", Georgia, serif; font-weight: 450; font-size: clamp(1.1rem, 2vw, 1.45rem); letter-spacing: -.025em; line-height: 1.5; }
 .spread-verse { margin-top: 7px; color: var(--muted); font-size: .75rem; letter-spacing: .03em; }
 .art-caption { align-self: center; justify-self: end; max-width: 300px; font-size: .8125rem; line-height: 1.7; text-align: right; color: var(--muted); }

@@ -32,6 +32,7 @@ PUBLIC_FILES = (
     "assets/vendor/page-flip-LICENSE.txt",
     "assets/book/152/manifest.json",
     "assets/book/section-flourish.svg",
+    "assets/book/title-star.svg",
     "assets/book/film-152/light.mp4",
     "assets/book/film-152/dark.mp4",
     "assets/book/film-152/poster-light.jpg",

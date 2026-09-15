@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <title>Eight-point star</title>
+  <desc>Original geometric star for The Christmas Story, Draft 02.</desc>
+  <path d="M24 5 L26.1 20.3 L35.3 12.7 L27.7 21.9 L43 24 L27.7 26.1 L35.3 35.3 L26.1 27.7 L24 43 L21.9 27.7 L12.7 35.3 L20.3 26.1 L5 24 L20.3 21.9 L12.7 12.7 L21.9 20.3 Z" fill="#AF8E54"/>
+  <path d="M24 9 L24 39 M9 24 L39 24" fill="none" stroke="#AF8E54" stroke-width="0.3"/>
+  <path d="M24 21.7 L26.3 24 L24 26.3 L21.7 24 Z" fill="#982F3B"/>
+</svg>
+
