@@ -6,8 +6,13 @@
 .book-site-header .product-navigation { box-shadow: none; }
 .book-appearance { position: fixed; top: 24px; right: max(4vw, calc((100vw - 1280px) / 2)); z-index: 16; width: auto; margin: 0; }
 .mobile-menu-toggle { display: none; }
-.menu-bars { display: flex; flex-direction: column; gap: 5px; width: 22px; }
-.menu-bars span { display: block; width: 100%; height: 1.5px; border-radius: 1px; background: currentColor; }
+.menu-bars { position: relative; display: block; width: 24px; height: 18px; }
+.menu-bars span { position: absolute; top: 8px; left: 0; display: block; width: 100%; height: 2px; border-radius: 1px; background: currentColor; transform-origin: center; transition: transform 280ms cubic-bezier(.2,.8,.2,1), opacity 160ms ease; }
+.menu-bars span:first-child { transform: translateY(-7px) rotate(0); }
+.menu-bars span:last-child { transform: translateY(7px) rotate(0); }
+.mobile-menu-toggle[aria-expanded="true"] .menu-bars span:first-child { transform: translateY(0) rotate(45deg); }
+.mobile-menu-toggle[aria-expanded="true"] .menu-bars span:nth-child(2) { opacity: 0; transform: scaleX(.3); }
+.mobile-menu-toggle[aria-expanded="true"] .menu-bars span:last-child { transform: translateY(0) rotate(-45deg); }
 .book-introduction { padding-top: clamp(48px, 6vw, 84px); text-align: center; }
 .eyebrow { font-size: .7rem; font-weight: 400; line-height: 1.7; letter-spacing: .2em; text-transform: uppercase; color: var(--brass); }
 .showcase-title { margin: 22px 0 0; font-size: clamp(2.25rem, 6.5vw, 5.75rem); }
@@ -47,10 +52,10 @@
 .footer-home { margin-left: auto; font-size: .8125rem; color: var(--muted); }
 .footer-home:hover { color: var(--brass); }
 @media (max-width: 719px) {
-  .book-page { --navigation-height: 72px; }
+  .book-page { --navigation-height: 84px; }
   .book-container { width: 90%; }
-  .book-site-header .product-navigation .product-nav-inner { width: 94%; min-height: 72px; grid-template-columns: 44px minmax(0, 1fr); column-gap: 8px; }
-  .book-site-header .company-logo { width: 44px; }
+  .book-site-header .product-navigation .product-nav-inner { width: 94%; min-height: 84px; grid-template-columns: 64px minmax(0, 1fr); column-gap: 8px; }
+  .book-site-header .company-logo { width: 64px; }
   .book-appearance { position: static; width: auto; min-height: 44px; margin: 0; padding: 8px; display: flex; justify-content: flex-start; border-top: 1px solid var(--rule); }
   .book-appearance .theme-toggle { flex-direction: row; }
   .book-appearance .theme-menu-options { right: auto; left: 43px; flex-direction: row; transform: translateX(-5px); }
@@ -60,8 +65,12 @@
   .book-site-header.has-menu .mobile-menu-toggle { display: inline-flex; align-items: center; justify-content: center; grid-column: 2; grid-row: 1; justify-self: end; width: 44px; height: 44px; padding: 0; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
   .book-site-header .mobile-menu-toggle[hidden] { display: none; }
   .mobile-menu-toggle:hover { color: var(--brass); }
-  .book-site-header.has-menu .product-links { position: absolute; top: calc(100% + 1px); right: 0; width: min(280px, calc(100vw - 24px)); display: flex; flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 8px; padding: 16px; border: 1px solid var(--rule); border-radius: 3px; background: var(--background); box-shadow: 0 12px 26px -14px #00000066; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-4px); transition: opacity 160ms ease, visibility 160ms ease, transform 160ms ease; }
-  .book-site-header.has-menu .mobile-menu-toggle[aria-expanded="true"] + .product-links { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+  .book-site-header.has-menu .product-links { position: absolute; top: calc(100% + 1px); right: 0; width: min(280px, calc(100vw - 24px)); display: flex; flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 8px; padding: 16px; border: 1px solid var(--rule); border-radius: 3px; background: var(--background); box-shadow: 0 12px 26px -14px #00000066; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-10px) scale(.97); transform-origin: top right; transition: opacity 160ms ease, transform 200ms cubic-bezier(.4,0,1,1), visibility 0s linear 200ms; }
+  .book-site-header.has-menu .mobile-menu-toggle[aria-expanded="true"] + .product-links { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); transition: opacity 220ms ease, transform 320ms cubic-bezier(.16,1,.3,1), visibility 0s; }
+  .book-site-header.has-menu .product-links > :is(a, .book-appearance) { opacity: 0; transition: opacity 120ms ease, color 180ms ease, transform 320ms cubic-bezier(.2,.7,.2,1); }
+  .book-site-header.has-menu .mobile-menu-toggle[aria-expanded="true"] + .product-links > :is(a, .book-appearance) { opacity: 1; transition-duration: 220ms, 180ms, 320ms; transition-delay: 40ms, 0s, 0s; }
+  .book-site-header.has-menu .mobile-menu-toggle[aria-expanded="true"] + .product-links > a:nth-of-type(2) { transition-delay: 70ms, 0s, 0s; }
+  .book-site-header.has-menu .mobile-menu-toggle[aria-expanded="true"] + .product-links > .book-appearance { transition-delay: 100ms, 0s, 0s; }
   .book-site-header.has-menu .product-links a { justify-content: flex-start; min-height: 44px; padding-inline: 8px; }
   .book-site-header.has-menu .nav-divider { width: 100%; height: 1px; }
   .showcase-title { font-size: clamp(2.25rem, 10.3vw, 4.5rem); margin-top: 18px; }
