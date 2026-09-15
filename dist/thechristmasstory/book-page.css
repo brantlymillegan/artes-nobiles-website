@@ -1,8 +1,9 @@
-.book-page { --navigation-height: 84px; --menu-background: #e6e2da; }
-:root[data-theme="dark"] .book-page { --menu-background: #343d49; }
+.book-page { --navigation-height: 84px; --menu-background: #e6e2da; --book-heading: #21483d; --book-subtitle: #982f3b; }
+:root[data-theme="dark"] .book-page { --menu-background: #343d49; --book-heading: var(--ink); --book-subtitle: var(--brass); }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .book-page { --menu-background: #343d49; }
+  :root:not([data-theme]) .book-page { --menu-background: #343d49; --book-heading: var(--ink); --book-subtitle: var(--brass); }
 }
+.book-page main :is(h1, h2, h3) { color: var(--book-heading); }
 .book-container { width: min(1280px, 92%); margin-inline: auto; }
 .book-site-header { position: sticky; top: 0; z-index: 15; padding: 0; background: var(--background); border-bottom: 1px solid var(--rule); }
 .book-site-header .product-nav-inner { width: min(1280px, 92%); min-height: 84px; grid-template-columns: 72px minmax(0, 1fr) 72px; }
@@ -19,7 +20,8 @@
 .mobile-menu-toggle[aria-expanded="true"] .menu-bars span:nth-child(2) { opacity: 0; transform: scaleX(.3); }
 .mobile-menu-toggle[aria-expanded="true"] .menu-bars span:last-child { transform: translateY(0) rotate(-45deg); }
 .book-introduction { padding-top: clamp(48px, 6vw, 84px); text-align: center; }
-.eyebrow { font-size: .7rem; font-weight: 400; line-height: 1.7; letter-spacing: .2em; text-transform: uppercase; color: var(--brass); }
+.eyebrow { font-size: .7rem; font-weight: 400; line-height: 1.7; letter-spacing: .11em; text-transform: uppercase; color: var(--book-subtitle); }
+.eyebrow svg { display: inline-block; max-width: 100%; vertical-align: middle; }
 .book-page :is(.eyebrow, .spread-caption h3)::before { content: ""; display: block; width: 32px; height: 32px; margin-bottom: 12px; background: url("/assets/book/title-star.svg") center / contain no-repeat; }
 .book-introduction > .eyebrow::before { margin-inline: auto; }
 .book-page .spread-caption h3::before { width: 24px; height: 24px; margin-bottom: 10px; }
