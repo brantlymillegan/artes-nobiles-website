@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="40" viewBox="0 0 360 40">
+  <title>Christmas Story — engraved architectural side ornament</title>
+  <desc>Original vector design: paired gold fillets, stepped keywork, interlaced scrolls, an open central jewel and geometric evergreen finials. Transparent background, proportionally placed. No bitmap textures.</desc>
+  <!-- Draft 152 interior side ornament, rotated for a horizontal section divider. -->
+  <g transform="translate(360 0) rotate(90)">
+  <defs>
+    <g id="upper-register">
+      <!-- Pointed binding finial with an open, faceted core. -->
+      <g fill="none" stroke="#B58B4B" stroke-linejoin="miter">
+        <path d="M20 5 V12 M20 16 V25" stroke-width=".65"/>
+        <path d="M20 11 L23 16 L20 21 L17 16 Z" stroke-width=".6"/>
+        <path d="M12 28 H28 M15 31 H25" stroke-width=".6"/>
+        <path d="M20 31 V35 M20 59 V62" stroke-width=".55"/>
+        <!-- Pierced architectural finial: clipped shoulders, open facets, no paired leaves. -->
+        <path d="M20 35 L27 42 V52 L20 59 L13 52 V42 Z" stroke-width=".6"/>
+        <path d="M20 39 L24 47 L20 55 L16 47 Z" stroke-width=".4"/>
+        <path d="M13 42 L16 47 L13 52 M27 42 L24 47 L27 52" stroke-width=".35"/>
+        <path d="M12 62 H28 M16 65 H24" stroke-width=".42"/>
+        <!-- Long uninterrupted rules are balanced by shorter stepped side rails. -->
+        <path d="M16 75 V114 M24 114 V75" stroke-width=".68"/>
+        <path d="M20 72 V114" stroke-width=".35"/>
+        <path d="M11 80 V87 H8 V104 H11 V111 M29 80 V87 H32 V104 H29 V111" stroke-width=".42"/>
+        <path d="M13 75 H27 M13 78 H27 M14 114 H26" stroke-width=".45"/>
+        <!-- Small facet separates the linear shaft from the shoulder scrolls. -->
+        <path d="M20 127 L23.2 131 L20 135 L16.8 131 Z M20 135 V141" stroke-width=".6"/>
+        <path d="M20 151 C15 146 5 147 5 137 C5 131 10 129 13 132 C15.5 134.5 13.8 138.5 10.8 137.5" stroke-width=".65"/>
+        <path d="M20 151 C25 146 35 147 35 137 C35 131 30 129 27 132 C24.5 134.5 26.2 138.5 29.2 137.5" stroke-width=".65"/>
+        <path d="M20 143 V157" stroke-width=".55"/>
+      </g>
+      <!-- Four isolated gilt leaf accents: two here, repeated by the existing half-turn. -->
+      <g fill="#B58B4B" fill-rule="evenodd">
+        <path d="M6.2 102.3 C1.7 99.9 1.8 93.8 2.8 89.7 C6.2 92.5 7.5 98.1 6.2 102.3 Z M5.8 100.8 L3.35 91.9 L6.16 100.42 Z"/>
+        <path d="M33.8 102.3 C38.3 99.9 38.2 93.8 37.2 89.7 C33.8 92.5 32.5 98.1 33.8 102.3 Z M34.2 100.8 L36.65 91.9 L33.84 100.42 Z"/>
+      </g>
+      <!-- Faceted evergreen core; only the two central leaf accents remain. -->
+      <g fill-rule="evenodd">
+        <path fill="#21483D" d="M20 43 L21.9 47 L20 51 L18.1 47 Z"/>
+        <path fill="#B58B4B" d="M17 151 C11.1 151 7.1 155.2 6.3 160.6 C11.8 159.5 15.7 156.4 17 151 Z M14.7 153.1 L8.3 158.6 L14.96 153.43 Z"/>
+        <path fill="#B58B4B" d="M23 151 C28.9 151 32.9 155.2 33.7 160.6 C28.2 159.5 24.3 156.4 23 151 Z M25.3 153.1 L31.7 158.6 L25.04 153.43 Z"/>
+      </g>
+      <g fill="#B58B4B">
+        <circle cx="20" cy="3" r=".7"/>
+        <circle cx="20" cy="69" r=".8"/>
+        <circle cx="20" cy="120.5" r=".8"/>
+        <circle cx="11" cy="115" r=".5"/>
+        <circle cx="29" cy="115" r=".5"/>
+      </g>
+    </g>
+  </defs>
+  <use href="#upper-register" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#upper-register"/>
+  <use href="#upper-register" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#upper-register" transform="rotate(180 20 180)"/>
+  <!-- Open jewel-like cartouche with stepped shoulders and an inset lozenge. -->
+  <g fill="none" stroke="#B58B4B" stroke-linejoin="miter">
+    <path d="M20 159 L27 167 H31 V174 L36 180 L31 186 V193 H27 L20 201 L13 193 H9 V186 L4 180 L9 174 V167 H13 Z" stroke-width=".7"/>
+    <path d="M20 165 L29.3 180 L20 195 L10.7 180 Z" stroke-width=".45"/>
+    <path d="M20 170 L25.9 180 L20 190 L14.1 180 Z" stroke-width=".55"/>
+    <path d="M4 180 H10.7 M29.3 180 H36 M20 159 V165 M20 195 V201" stroke-width=".45"/>
+    <path d="M1.7 174 V186 M38.3 174 V186" stroke-width=".45"/>
+  </g>
+  <path d="M20 175.4 L22.1 180 L20 184.6 L17.9 180 Z" fill="#982F3B"/>
+  </g>
+</svg>
