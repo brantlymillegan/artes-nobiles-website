@@ -11,6 +11,8 @@
   let control;
   let trigger;
   let options;
+  let choices;
+  let mobile;
 
   function readPreference() {
     try {
@@ -70,10 +72,13 @@
       button.addEventListener("click", () => chooseTheme(value));
       options.append(button);
     }
+    for (const button of choices?.querySelectorAll("button") ?? []) {
+      button.setAttribute("aria-pressed", String(button.dataset.theme === theme));
+    }
     setOpenMode(openMode);
   }
 
-  function chooseTheme(value) {
+  function chooseTheme(value, focusTarget = trigger) {
     theme = value;
     try {
       if (theme === "system") window.localStorage.removeItem(storageKey);
@@ -84,7 +89,7 @@
     applyDocumentTheme();
     renderControl();
     setOpenMode("closed");
-    trigger.focus();
+    focusTarget.focus({ preventScroll: true });
   }
 
   window.addEventListener("storage", event => {
@@ -98,6 +103,30 @@
     control = document.querySelector(".theme-toggle");
     trigger = control.querySelector(".theme-trigger");
     options = control.querySelector(".theme-menu-options");
+    choices = document.querySelector(".theme-choices");
+    if (choices) {
+      mobile = window.matchMedia("(max-width: 719px)");
+      for (const value of themes) {
+        const button = document.createElement("button");
+        button.className = "theme-choice";
+        button.type = "button";
+        button.dataset.theme = value;
+        button.innerHTML = `<span class="theme-symbol" aria-hidden="true">${icon(value)}</span><span>${labels[value]}</span>`;
+        button.addEventListener("click", () => chooseTheme(value, button));
+        choices.append(button);
+      }
+      // A breakpoint can hide a focused control. Close its old popup and
+      // move focus to the corresponding visible control without scrolling.
+      mobile.addEventListener("change", () => {
+        setOpenMode("closed");
+        if (mobile.matches && control.contains(document.activeElement)) {
+          [...choices.querySelectorAll("button")].find(button => button.dataset.theme === theme)?.focus({ preventScroll: true });
+        } else if (!mobile.matches && choices.contains(document.activeElement)) {
+          trigger.focus({ preventScroll: true });
+        }
+      });
+      choices.hidden = false;
+    }
     renderControl();
     control.hidden = false;
 
