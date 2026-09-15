@@ -62,7 +62,7 @@
 .spread-caption h3 { margin: 0; font-family: "Noto Serif Rosarium", Georgia, serif; font-weight: 450; font-size: clamp(1.1rem, 2vw, 1.45rem); letter-spacing: -.025em; line-height: 1.5; }
 .spread-verse { margin-top: 7px; color: var(--muted); font-size: .75rem; letter-spacing: .03em; }
 .art-caption { align-self: center; justify-self: end; max-width: 300px; font-size: .8125rem; line-height: 1.7; text-align: right; color: var(--muted); }
-.spread-pages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: #faf6ef; box-shadow: 0 2px 3px #00000008, 0 18px 28px -24px #00000066; }
+.spread-pages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: #faf6ef; box-shadow: 0 0 0 1px #0000001a, 0 3px 10px #0000001a, 0 14px 34px -6px #00000033; }
 .spread-pages img { width: 100%; height: auto; }
 .book-return { text-align: center; margin-top: 48px; }
 .text-link { display: inline-flex; align-items: center; justify-content: center; gap: 24px; min-height: 48px; padding-block: 9px; border-bottom: 1px solid var(--brass); font-size: .9375rem; transition: transform 240ms, color 180ms; }
