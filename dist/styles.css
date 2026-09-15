@@ -17,6 +17,7 @@
   --navigation-height: 72px;
   --background: #f6f4ef;
   --ink: #202521;
+  --book-title-ink: #21483d;
   --muted: #626660;
   --rule: #d4d5ce;
   --brass: #947d51;
@@ -40,6 +41,7 @@
   :root:not([data-theme]) {
     --background: #252a32;
     --ink: #f1f0e5;
+    --book-title-ink: var(--ink);
     --muted: #a8b3c4;
     --rule: #3a4655;
     --brass: #cab581;
@@ -62,6 +64,7 @@
 :root[data-theme="dark"] {
   --background: #252a32;
   --ink: #f1f0e5;
+  --book-title-ink: var(--ink);
   --muted: #a8b3c4;
   --rule: #3a4655;
   --brass: #cab581;
@@ -127,7 +130,9 @@ p, h1, h2 { margin: 0; }
 .book-the { display: block; flex: 0 0 auto; font-size: .55em; font-style: italic; font-weight: 400; letter-spacing: 0; line-height: 1; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .nav-book { font-size: 1.125rem; padding-bottom: calc(6px + .233em); }
+.nav-book, .book-title-link { color: var(--book-title-ink); }
 .nav-book-icon { width: 1.5em; height: 1.5em; flex: none; margin-inline-end: .1em; object-fit: contain; }
+.book-title-icon { width: 1.2em; height: 1.2em; flex: none; margin-inline-end: .1em; object-fit: contain; }
 .nav-book .book-the { font-size: .72em; }
 .product { text-align: center; padding-block: 42px 58px; scroll-margin-top: 28px; }
 .product-category { font-size: .75rem; text-transform: uppercase; letter-spacing: .17em; line-height: 1.6; color: var(--muted); }
