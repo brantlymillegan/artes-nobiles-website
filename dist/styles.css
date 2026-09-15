@@ -116,7 +116,8 @@ p, h1, h2 { margin: 0; }
 .product-navigation.is-stuck .nav-logo { opacity: 1; visibility: visible; pointer-events: auto; }
 .nav-divider { width: 1px; height: 17px; background: var(--rule); }
 .rosarium-brand { font-family: "Noto Serif Rosarium", Georgia, serif; font-weight: 720; letter-spacing: .18em; text-transform: uppercase; }
-.nav-rosarium { font-size: .875rem; }
+.nav-rosarium { font-size: .875rem; gap: .5em; white-space: nowrap; }
+.rosarium-app-icon { display: block; width: 1.6em; height: 1.6em; flex: none; border-radius: 22%; object-fit: cover; }
 .book-title-lockup { display: inline-flex; align-items: center; justify-content: center; gap: .22em; padding-bottom: .233em; font-weight: 400; line-height: 1.2; }
 .book-title-lockup > span { min-width: 0; }
 .book-title-lockup svg { display: block; max-width: none; }
@@ -146,7 +147,7 @@ p, h1, h2 { margin: 0; }
 .rosarium-playback:hover { background: var(--surface); color: var(--ink); }
 .product-details { width: min(540px, 100%); margin-inline: auto; }
 .rosarium-title { font-size: clamp(1.9rem, 4vw, 2.5rem); line-height: 1.3; }
-.rosarium-title-link { display: inline-block; }
+.rosarium-title-link { display: inline-flex; align-items: center; gap: .42em; }
 .book-title-link { display: inline-flex; align-items: center; gap: inherit; }
 .rosarium-title-link, .book-title-link { transform-origin: center; transition: color .18s, transform .32s cubic-bezier(.2,.7,.2,1); }
 .rosarium-title-link:hover, .rosarium-title-link:focus-visible, .book-title-link:hover, .book-title-link:focus-visible { color: var(--brass); }
@@ -262,6 +263,12 @@ p, h1, h2 { margin: 0; }
   .product-links { column-gap: 6px; }
   .store-badges { gap: 16px; }
   .google-play-badge img, .app-store-badge img { height: 40px; }
+}
+@media (max-width: 359px) {
+  body:not(.book-page) .product-links { column-gap: 3px; }
+  body:not(.book-page) .nav-rosarium { gap: .3em; }
+  body:not(.book-page) .nav-rosarium .rosarium-app-icon { width: 1.4em; height: 1.4em; }
+  body:not(.book-page) .nav-book { font-size: .875rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

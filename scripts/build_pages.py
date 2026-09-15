@@ -27,6 +27,7 @@ PUBLIC_FILES = (
     "assets/rosarium-demo-dark-v6.mp4",
     "assets/rosarium-video-poster-light.png",
     "assets/rosarium-video-poster-dark.png",
+    "assets/rosarium-app-icon.png",
     "assets/vendor/page-flip-2.0.7.js",
     "assets/vendor/page-flip-LICENSE.txt",
     "assets/book/152/manifest.json",

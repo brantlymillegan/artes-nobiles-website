@@ -18,7 +18,7 @@ Link previews use the page title “Artes Nobiles” and description “Sacred a
 
 Brand rules for this site:
 - Do not invent company or product slogans or mottos.
-- Render the ROSARIUM wordmark with its official Noto Serif variable font: weight 720 and 0.18em letter spacing.
+- Render the ROSARIUM wordmark with its official Noto Serif variable font: weight 720 and 0.18em letter spacing. Pair each visible title and navigation wordmark with the approved app icon on its left, using 22% rounded corners.
 - In every visible book title, set “The” smaller and italic, vertically centered to the left of “Christmas Story.”
 - Center “The” against the main letters’ bodies, excluding the long tail of the “y.” The shared title component uses a .744em alignment box and reserves .233em below for the descender, in both the navigation and book heading.
 - Match the cover’s exact typefaces: Big Caslon Medium for “Christmas Story” (tracking −0.018em) and Minion Variable Concept Italic for “The” (weight 400, optical size 21.22). The menu and book heading use outlined SVG glyphs from those actual font files, with accessible text, so rendering does not depend on installed fonts. Keep the existing website size ratios and vertical centering. Source measurements and the CoreText outline generator are in `output/christmas-title-fonts/`; no cover font files or book PDF are published.
@@ -29,6 +29,7 @@ The Galaxy S26 photograph is the official Samsung base-model Front2 Black asset.
 The System / Light / Dark control matches brantly.com's `app/theme-toggle.tsx` and its control styles. It opens on mouse hover, stays open on click, and closes after selection, Escape, or an outside press. An explicit preference is saved under `artes-nobiles-theme`; System clears that override and follows live OS appearance changes. Both the page and app video follow the resolved theme.
 
 Asset sources:
+- ROSARIUM app icon: unchanged approved 512×512 Play Store icon from `../../Rosary app/play-store/assets/play-icon-512x512.png` (in the user’s Documents folder), identified by that project’s `play-store/LOGO-REFRESH.md`. The site uses CSS for its rounded corners.
 - App Store badge: unchanged English SVG from [Apple](https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg), downloaded September 12, 2026. Displayed as a disabled control with reduced opacity and “Coming soon” beneath it until the iOS listing is available.
 - Google Play badge: unchanged English SVG from Google’s [Partner Marketing Hub](https://partnermarketinghub.withgoogle.com/brands/google-play/google-play/lockups-icons-badges/), downloaded September 12, 2026. Displayed at 48px high with at least 12px surrounding clear space, linked directly to ROSARIUM’s listing.
 - ROSARIUM video and posters: approved version 6 from `output/rosarium-animation/v6/`, created September 12, 2026. Actual emulator captures use 1080×2340, 420 logical dpi, font scale 1.0, and the original Samsung frame. Public files are `rosarium-demo-light-v6.mp4`, `rosarium-demo-dark-v6.mp4`, and their transparent opening-frame PNGs. Earlier still screenshots remain archived in the repository but are no longer published.
