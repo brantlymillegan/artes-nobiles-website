@@ -33,8 +33,8 @@
     <script type="module" src="/book-reader.js?v=9"></script>
     <link rel="stylesheet" href="/book-reader.css?v=6">
     <link rel="stylesheet" href="/styles.css?v=30">
-    <link rel="stylesheet" href="/thechristmasstory/book-page.css?v=4">
-    <script type="module" src="/thechristmasstory/book-film.js?v=1"></script>
+    <link rel="stylesheet" href="/thechristmasstory/book-page.css?v=5">
+    <script type="module" src="/thechristmasstory/book-film.js?v=2"></script>
     <script type="module" src="/thechristmasstory/book-navigation.js?v=1"></script>
   </head>
   <body class="book-page" id="top">
@@ -110,9 +110,10 @@
           <p>Take a short tour of the book, from the cover to the paintings and the words of Scripture.</p>
         </div>
         <div class="film-frame">
-          <video class="book-film-video" width="1920" height="1200" controls muted loop playsinline preload="none" aria-label="A video tour through The Christmas Story" aria-describedby="film-description" poster="/assets/book/film-152/poster-light.jpg" data-light-src="/assets/book/film-152/light.mp4" data-dark-src="/assets/book/film-152/dark.mp4" data-light-poster="/assets/book/film-152/poster-light.jpg" data-dark-poster="/assets/book/film-152/poster-dark.jpg">
+          <video class="book-film-video" id="book-tour" width="1920" height="1200" muted loop playsinline preload="none" aria-label="A video tour through The Christmas Story" aria-describedby="film-description" poster="/assets/book/film-152/poster-light.jpg" data-light-src="/assets/book/film-152/light.mp4" data-dark-src="/assets/book/film-152/dark.mp4" data-light-poster="/assets/book/film-152/poster-light.jpg" data-dark-poster="/assets/book/film-152/poster-dark.jpg">
             Your browser does not support embedded video.
           </video>
+          <button class="film-playback" type="button" aria-controls="book-tour" aria-label="Play book tour" hidden></button>
         </div>
         <div class="film-caption">
           <p id="film-description">A one-minute tour. Page turns, close-ups of the art, and the accompanying Scripture. No audio.</p>

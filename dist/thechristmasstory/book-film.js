@@ -5,6 +5,7 @@ if (film) {
   const system = matchMedia('(prefers-color-scheme: dark)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const error = document.querySelector('.film-error');
+  const playback = document.querySelector('.film-playback');
   let theme;
   let loaded = false;
   let resumeTime = 0;
@@ -15,8 +16,13 @@ if (film) {
     return root.dataset.theme === 'dark' || (!root.dataset.theme && system.matches) ? 'dark' : 'light';
   }
 
+  function syncPlaybackControl() {
+    playback?.setAttribute('aria-label', film.paused ? 'Play book tour' : 'Pause book tour');
+  }
+
   function play() {
-    film.play().catch(() => {}); // Native controls remain usable if autoplay is blocked.
+    // If autoplay is blocked, a direct tap can start it without player chrome.
+    film.play().catch(syncPlaybackControl);
   }
 
   function syncTheme() {
@@ -37,9 +43,33 @@ if (film) {
 
   film.addEventListener('loadedmetadata', () => {
     if (resumeTime > 0) film.currentTime = Math.min(resumeTime, Math.max(0, film.duration - .1));
-    if (shouldPlay && !document.hidden && !reducedMotion.matches) play();
+    if (shouldPlay && !document.hidden) play();
   });
-  film.addEventListener('error', () => { error.hidden = false; });
+  film.addEventListener('play', syncPlaybackControl);
+  film.addEventListener('pause', syncPlaybackControl);
+  film.addEventListener('error', () => {
+    error.hidden = false;
+    syncPlaybackControl();
+  });
+  if (playback) {
+    playback.addEventListener('click', () => {
+      if (film.paused) {
+        // Explicit playback is allowed even when reduced motion disables autoplay.
+        shouldPlay = true;
+        if (!loaded) {
+          loaded = true;
+          syncTheme();
+        }
+        play();
+      } else {
+        shouldPlay = false;
+        resumeWhenVisible = false;
+        film.pause();
+      }
+    });
+    syncPlaybackControl();
+    playback.hidden = false;
+  }
   reducedMotion.addEventListener('change', () => {
     if (reducedMotion.matches) {
       shouldPlay = false;
@@ -51,7 +81,7 @@ if (film) {
     if (document.hidden) {
       resumeWhenVisible = !film.paused;
       film.pause();
-    } else if (resumeWhenVisible && !reducedMotion.matches) {
+    } else if (resumeWhenVisible) {
       resumeWhenVisible = false;
       play();
     }
