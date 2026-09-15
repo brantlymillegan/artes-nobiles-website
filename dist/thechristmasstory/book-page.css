@@ -1,4 +1,8 @@
-.book-page { --navigation-height: 84px; }
+.book-page { --navigation-height: 84px; --menu-background: #e6e2da; }
+:root[data-theme="dark"] .book-page { --menu-background: #343d49; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .book-page { --menu-background: #343d49; }
+}
 .book-container { width: min(1280px, 92%); margin-inline: auto; }
 .book-site-header { position: sticky; top: 0; z-index: 15; padding: 0; background: var(--background); border-bottom: 1px solid var(--rule); }
 .book-site-header .product-nav-inner { width: min(1280px, 92%); min-height: 84px; grid-template-columns: 72px minmax(0, 1fr) 72px; }
@@ -82,7 +86,7 @@
     gap: 12px; padding: 24px max(6vw, calc((100vw - 540px) / 2)) 28px;
     max-height: calc(100svh - 85px); overflow-y: auto; overscroll-behavior: contain;
     border: 0; border-bottom: 1px solid var(--rule); border-radius: 0 0 12px 12px;
-    background: var(--background); box-shadow: 0 24px 36px -26px #00000080;
+    background: var(--menu-background); box-shadow: 0 24px 36px -26px #00000080;
     opacity: .4; visibility: hidden; pointer-events: none;
     clip-path: inset(0 0 100% 0); transform: perspective(800px) rotateX(-12deg) translateY(-8px); transform-origin: center top;
     transition: clip-path 420ms cubic-bezier(.65,0,.35,1), transform 420ms cubic-bezier(.65,0,.35,1), opacity 420ms ease, visibility 0s linear 420ms;
