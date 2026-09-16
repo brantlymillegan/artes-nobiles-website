@@ -1,6 +1,6 @@
 # Artes Nobiles
 
-A simple, responsive, static website. The publishable website is in `dist/`. At desktop widths of 960px and above, each product’s copy is on the left and its image is on the right; smaller screens keep the stacked category, image, and details layout.
+A simple, responsive, static website. The publishable website is in `dist/`. The Christmas Story appears first and ROSARIUM second on the homepage and in every product navigation menu. At desktop widths of 960px and above, each product’s copy is on the left and its image is on the right; smaller screens keep the stacked category, image, and details layout.
 
 Workflow preference: push completed website updates directly to `master` for immediate production deployment.
 
