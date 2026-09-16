@@ -120,7 +120,9 @@ p, h1, h2 { margin: 0; }
 .nav-divider { width: 1px; height: 17px; background: var(--rule); }
 .rosarium-brand { font-family: "Noto Serif Rosarium", Georgia, serif; font-weight: 720; letter-spacing: .18em; text-transform: uppercase; }
 .nav-rosarium { font-size: .875rem; gap: .5em; white-space: nowrap; }
-.rosarium-app-icon { display: block; width: 1.6em; height: 1.6em; flex: none; border-radius: 22%; object-fit: cover; }
+.rosarium-app-icon { display: block; position: relative; width: 1.6em; height: 1.6em; flex: none; overflow: hidden; border-radius: 22%; }
+/* Match Android's centered 72dp viewport within the 108dp adaptive-icon layer. */
+.rosarium-app-icon img { position: absolute; display: block; width: 150%; height: 150%; max-width: none; left: -25%; top: -25%; object-fit: cover; }
 .book-title-lockup { display: inline-flex; align-items: center; justify-content: center; gap: .22em; padding-bottom: .233em; font-weight: 400; line-height: 1.2; }
 .book-title-lockup > span { min-width: 0; }
 .book-title-lockup svg { display: block; max-width: none; }
