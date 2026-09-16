@@ -152,11 +152,10 @@ p, h1, h2 { margin: 0; }
 .rosarium-playback.is-paused .video-play-icon { display: block; }
 .rosarium-playback:hover { background: var(--surface); color: var(--ink); }
 .christmas-visual { display: block; width: min(640px, 100%); }
-.christmas-film-frame { position: relative; aspect-ratio: 22 / 17; overflow: hidden; background: var(--background); transform-origin: center; transition: transform .32s cubic-bezier(.2,.7,.2,1); }
+.christmas-film-frame { display: block; position: relative; aspect-ratio: 22 / 17; overflow: hidden; background: var(--background); transform-origin: center; transition: transform .32s cubic-bezier(.2,.7,.2,1); }
 .christmas-film-frame video { display: block; width: 100%; height: 100%; object-fit: contain; background: var(--background); pointer-events: none; }
-.christmas-visual .film-playback { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-.christmas-visual .film-playback[hidden], .christmas-visual .film-error[hidden] { display: none; }
-.christmas-visual .film-playback:focus-visible { outline-offset: -6px; }
+.christmas-film-frame:focus-visible { outline-offset: -6px; }
+.christmas-visual .film-error[hidden] { display: none; }
 .christmas-visual .film-error { padding-top: 16px; font-size: .875rem; line-height: 1.6; color: var(--muted); }
 .christmas-visual .film-error a { text-decoration: underline; }
 .product-details { width: min(540px, 100%); margin-inline: auto; }

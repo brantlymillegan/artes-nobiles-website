@@ -32,7 +32,7 @@
     <script type="module" src="logo.js?v=3"></script>
     <script type="module" src="thechristmasstory/book-film.js?v=2"></script>
     <script type="module" src="rosarium-video.js?v=1"></script>
-    <link rel="stylesheet" href="styles.css?v=35">
+    <link rel="stylesheet" href="styles.css?v=36">
   </head>
   <body>
     <a class="skip-link" href="#our-work">Skip to our work</a>
@@ -123,12 +123,11 @@
       <article class="product christmas-product" id="christmas-story" aria-labelledby="book-title">
         <p class="product-category">Sacred Art &amp; Scripture</p>
         <div class="product-visual christmas-visual">
-          <div class="christmas-film-frame">
+          <a class="christmas-film-frame" href="/thechristmasstory/" aria-label="Explore The Christmas Story">
             <video class="book-film-video" id="home-book-tour" width="1584" height="1224" muted loop playsinline preload="none" aria-label="A video tour through The Christmas Story" poster="/assets/book/film-152-mobile-v3/poster-light.png" data-light-src="/assets/book/film-152-mobile-v3/light.mp4" data-dark-src="/assets/book/film-152-mobile-v3/dark.mp4" data-light-poster="/assets/book/film-152-mobile-v3/poster-light.png" data-dark-poster="/assets/book/film-152-mobile-v3/poster-dark.png">
               Your browser does not support embedded video.
             </video>
-            <button class="film-playback" type="button" aria-controls="home-book-tour" aria-label="Play book tour" hidden></button>
-          </div>
+          </a>
           <p class="film-error" role="status" hidden>The film couldn’t load. <a href="/thechristmasstory/">Explore The Christmas Story</a>.</p>
           <noscript><p class="film-error"><a href="/assets/book/film-152-mobile-v3/light.mp4">Play the book film</a></p></noscript>
         </div>
