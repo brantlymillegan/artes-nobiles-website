@@ -26,6 +26,17 @@ jobs:
     steps:
       - name: Check out website
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Check out Flappy Pope
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: brantlymillegan/flappypope
+          ref: main
+          path: _flappypope
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '22'
       - name: Validate and assemble public website
         run: |
           node --check dist/theme.js
@@ -37,6 +48,13 @@ jobs:
           node --check dist/assets/vendor/page-flip-2.0.7.js
           node --check dist/assets/logo-motion.js
           python3 scripts/build_pages.py
+      - name: Validate and include Flappy Pope
+        run: |
+          npm --prefix _flappypope run check
+          npm --prefix _flappypope test
+          test -f _flappypope/dist/index.html
+          test ! -e _site/flappypope
+          cp -R _flappypope/dist _site/flappypope
       - name: Configure GitHub Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
       - name: Upload public website

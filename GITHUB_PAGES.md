@@ -17,6 +17,18 @@ Changes pushed to `master` deploy automatically. To redeploy manually, use **Act
 
 The workflow validates the site, stages only the files listed in `PUBLIC_FILES` in `scripts/build_pages.py`, and publishes `_site/`. It uses the official GitHub Pages actions and the repository's built-in token. No hosting API key or separate server is required. The book PDF, design files, archived images, and unused fonts are excluded from the release.
 
+## Flappy Pope
+
+[Flappy Pope](https://artesnobiles.com/flappypope/) is maintained separately in [brantlymillegan/flappypope](https://github.com/brantlymillegan/flappypope). After assembling the main website, the workflow validates the game and copies only its `dist/` directory to `_site/flappypope/`. Game source files are not duplicated in this repository. The domain and existing Pages settings stay on this website repository.
+
+Each website deployment fetches the game's `main` branch. After pushing game changes, run this website's deployment workflow on `master` to publish them:
+
+```sh
+gh workflow run pages.yml --repo brantlymillegan/artes-nobiles-website --ref master
+```
+
+The game repository's validation workflow does not automatically trigger this website's deployment; the manual dispatch avoids adding cross-repository write credentials.
+
 `dist/CNAME` records the intended domain, but GitHub Actions deployments do not use that file to configure the domain. The **Custom domain** setting is already saved on GitHub. [GitHub custom-domain setup](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
 
 ## DNS records
