@@ -1,4 +1,11 @@
 @font-face {
+  font-family: "Flappy Pixel";
+  src: url("assets/flappy-pope/pixel.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
   font-family: "Noto Serif Rosarium";
   src: url("assets/noto-serif-variable.ttf") format("truetype");
   font-style: normal;
@@ -107,13 +114,13 @@ p, h1, h2 { margin: 0; }
 .company-logo .company-logo-light { display: var(--logo-light-display); }
 .company-logo .company-logo-dark { display: var(--logo-dark-display); }
 .wordmark { font-family: Georgia, "Times New Roman", serif; font-size: 2.55rem; font-weight: 700; letter-spacing: .13em; line-height: 1.35; }
-/* Keep the bar outside the hero so it stays pinned through both products. */
+/* Keep the bar outside the hero so it stays pinned through all products. */
 .nav-sentinel { height: 1px; margin-bottom: -1px; pointer-events: none; }
 .product-navigation { position: sticky; top: 0; z-index: 15; background: var(--background); }
 .product-nav-inner { position: relative; display: grid; grid-template-columns: 64px minmax(0, 1fr) 64px; align-items: center; min-height: 72px; border-bottom: 1px solid var(--rule); }
 .product-navigation.is-stuck { box-shadow: 0 1px 0 var(--rule); }
 .product-navigation.is-stuck .product-nav-inner { border-bottom-color: transparent; }
-.product-links { grid-column: 2; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 0 25px; padding-block: 12px; }
+.product-links { grid-column: 2; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 0 clamp(12px, 2vw, 25px); padding-block: 12px; }
 .product-links a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 6px; transform-origin: center; transition: color .18s, transform .32s cubic-bezier(.2,.7,.2,1); }
 .product-links a:hover { color: var(--brass); }
 .company-logo.nav-logo { grid-column: 1; grid-row: 1; width: 60px; margin: 0; padding: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 240ms ease, visibility 240ms, transform .32s cubic-bezier(.2,.7,.2,1); }
@@ -137,6 +144,18 @@ p, h1, h2 { margin: 0; }
 .nav-book-icon { width: 1.5em; height: 1.5em; flex: none; margin-inline-end: .1em; object-fit: contain; }
 .book-title-icon { width: 1.2em; height: 1.2em; flex: none; margin-inline-end: .1em; object-fit: contain; }
 .nav-book .book-the { font-size: .72em; }
+.nav-flappy { gap: .5em; font-size: .9375rem; font-weight: 400; white-space: nowrap; }
+.flappy-icon { display: block; width: 1.7em; height: 1.7em; flex: none; object-fit: contain; image-rendering: pixelated; }
+.flappy-title { font-family: "Flappy Pixel", monospace; font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: 400; line-height: 1.6; }
+.flappy-title-link { display: inline-flex; align-items: center; gap: .6em; }
+.flappy-title-link:hover, .flappy-title-link:focus-visible { color: var(--brass); }
+.flappy-title-link, .flappy-preview-link { transform-origin: center; transition: color .18s, transform .32s cubic-bezier(.2,.7,.2,1); }
+.flappy-visual { width: min(640px, 100%); }
+.flappy-preview-link { display: block; width: 100%; overflow: hidden; border: 1px solid var(--rule); border-radius: 10px; box-shadow: 0 16px 36px -18px #00000059; }
+.flappy-preview-link img { width: 100%; height: auto; }
+.flappy-preview-light { display: var(--app-light-display); }
+.flappy-preview-dark { display: var(--app-dark-display); }
+.flappy-preview-link:focus-visible { outline-offset: -6px; }
 .product { text-align: center; padding-block: 42px 58px; scroll-margin-top: 28px; }
 .product-category { font-size: .75rem; text-transform: uppercase; letter-spacing: .17em; line-height: 1.6; color: var(--muted); }
 .product-visual { position: relative; display: flex; align-items: center; justify-content: center; margin: 25px auto 32px; }
@@ -186,6 +205,9 @@ p, h1, h2 { margin: 0; }
   .company-logo:hover,
   .rosarium-visual:hover,
   .christmas-film-frame:hover,
+  .nav-flappy:hover,
+  .flappy-title-link:hover,
+  .flappy-preview-link:hover,
   .nav-rosarium:hover,
   .rosarium-title-link:hover,
   .book-title-link:hover,
@@ -196,6 +218,9 @@ p, h1, h2 { margin: 0; }
   .google-play-badge:focus-visible img { transform: translateY(-3px); }
   .rosarium-visual:focus-within,
   .christmas-film-frame:focus-within,
+  .nav-flappy:focus-visible,
+  .flappy-title-link:focus-visible,
+  .flappy-preview-link:focus-visible,
   .nav-rosarium:focus-visible,
   .rosarium-title-link:focus-visible,
   .book-title-link:focus-visible,

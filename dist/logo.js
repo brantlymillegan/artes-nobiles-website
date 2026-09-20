@@ -88,8 +88,9 @@ if (navigation && compactLogo && sentinel) {
   function updateStickyState() {
     const stuck = sentinel.getBoundingClientRect().top < 0;
     navigation.classList.toggle('is-stuck', stuck);
-    compactLogo.setAttribute('aria-hidden', String(!stuck));
-    compactLogo.tabIndex = stuck ? 0 : -1;
+    const visible = stuck || (navigation.querySelector('.mobile-menu-toggle') && window.matchMedia('(max-width: 839px)').matches);
+    compactLogo.setAttribute('aria-hidden', String(!visible));
+    compactLogo.tabIndex = visible ? 0 : -1;
   }
 
   function updateNavigationHeight() {

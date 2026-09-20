@@ -19,7 +19,7 @@ The workflow validates the site, stages only the files listed in `PUBLIC_FILES` 
 
 ## Flappy Pope
 
-[Flappy Pope](https://artesnobiles.com/flappypope/) is maintained separately in [brantlymillegan/flappypope](https://github.com/brantlymillegan/flappypope). After assembling the main website, the workflow validates the game and copies only its `dist/` directory to `_site/flappypope/`. Game source files are not duplicated in this repository. The domain and existing Pages settings stay on this website repository.
+[Flappy Pope](https://artesnobiles.com/flappypope/) is maintained separately in [brantlymillegan/flappypope](https://github.com/brantlymillegan/flappypope). After assembling the main website, the workflow validates the game and copies only its `dist/` directory to `_site/flappypope/`. Game source files are not duplicated in this repository. The homepage showcase and both navigation menus link to that route; the site builder allows this exact route because the workflow adds and validates it separately. The domain and existing Pages settings stay on this website repository.
 
 Each website deployment fetches the game's `main` branch. After pushing game changes, run this website's deployment workflow on `master` to publish them:
 
@@ -67,6 +67,7 @@ Edit the authored files in `dist/`. If you add an asset, include it in `PUBLIC_F
 ```sh
 node --check dist/theme.js
 node --check dist/logo.js
+node --check dist/navigation.js
 node --check dist/assets/logo-motion.js
 python3 scripts/build_pages.py
 python3 -m http.server 4173 --bind 127.0.0.1 --directory _site

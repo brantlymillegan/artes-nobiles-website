@@ -105,7 +105,7 @@
     options = control.querySelector(".theme-menu-options");
     choices = document.querySelector(".theme-choices");
     if (choices) {
-      mobile = window.matchMedia("(max-width: 719px)");
+      mobile = window.matchMedia("(max-width: 839px)");
       for (const value of themes) {
         const button = document.createElement("button");
         button.className = "theme-choice";
@@ -120,7 +120,10 @@
       mobile.addEventListener("change", () => {
         setOpenMode("closed");
         if (mobile.matches && control.contains(document.activeElement)) {
-          [...choices.querySelectorAll("button")].find(button => button.dataset.theme === theme)?.focus({ preventScroll: true });
+          const destination = choices.closest("[inert]")
+            ? document.querySelector(".mobile-menu-toggle")
+            : [...choices.querySelectorAll("button")].find(button => button.dataset.theme === theme);
+          destination?.focus({ preventScroll: true });
         } else if (!mobile.matches && choices.contains(document.activeElement)) {
           trigger.focus({ preventScroll: true });
         }

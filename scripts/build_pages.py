@@ -18,6 +18,13 @@ PUBLIC_FILES = (
     "thechristmasstory/book-film.js",
     "thechristmasstory/book-navigation.js",
     "styles.css",
+    "navigation.css",
+    "navigation.js",
+    "assets/flappy-pope/icon.svg",
+    "assets/flappy-pope/pixel.ttf",
+    "assets/flappy-pope/FONT-LICENSE.txt",
+    "assets/flappy-pope/preview-light.png",
+    "assets/flappy-pope/preview-dark.png",
     "theme.js",
     "logo.js",
     "book-reader.js",
@@ -168,6 +175,9 @@ def build():
     for origin, reference in references:
         url = urlsplit(urljoin("https://artesnobiles.com/" + origin, reference))
         if url.scheme != "https" or url.netloc != "artesnobiles.com":
+            continue
+        # The workflow validates and adds this route from the separate game repo.
+        if url.path in {"/flappypope", "/flappypope/"} and not url.fragment:
             continue
         name = unquote(url.path).lstrip("/")
         # GitHub Pages serves directory index routes with or without a trailing slash.
