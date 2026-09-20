@@ -68,6 +68,7 @@ Edit the authored files in `dist/`. If you add an asset, include it in `PUBLIC_F
 node --check dist/theme.js
 node --check dist/logo.js
 node --check dist/navigation.js
+node --check dist/product-logos.js
 node --check dist/assets/logo-motion.js
 python3 scripts/build_pages.py
 python3 -m http.server 4173 --bind 127.0.0.1 --directory _site
