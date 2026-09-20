@@ -1,6 +1,6 @@
 # Artes Nobiles
 
-A simple, responsive, static website. The publishable website is in `dist/`. The Christmas Story appears first, ROSARIUM second, and Flappy Pope third on the homepage. Navigation uses the same order, with the game labeled “Flappy Catholic” and linked to `/flappypope/`. At desktop widths of 960px and above, each product’s copy is on the left and its image is on the right; smaller screens keep the stacked category, image, and details layout.
+A simple, responsive, static website. The publishable website is in `dist/`. The Christmas Story appears first, ROSARIUM second, and Flappy Pope third on the homepage. Navigation uses the same order, with the game labeled “Flappy Pope” and linked to `/flappypope/`. At desktop widths of 960px and above, each product’s copy is on the left and its image is on the right; smaller screens keep the stacked category, image, and details layout.
 
 Workflow preference: push completed website updates directly to `master` for immediate production deployment.
 
