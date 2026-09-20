@@ -144,7 +144,7 @@ p, h1, h2 { margin: 0; }
 .nav-book-icon { width: 1.5em; height: 1.5em; flex: none; margin-inline-end: .1em; object-fit: contain; }
 .book-title-icon { width: 1.2em; height: 1.2em; flex: none; margin-inline-end: .1em; object-fit: contain; }
 .nav-book .book-the { font-size: .72em; }
-.nav-flappy { gap: .5em; font-size: .9375rem; font-weight: 400; white-space: nowrap; }
+.nav-flappy { gap: .5em; font-family: "Flappy Pixel", monospace; font-size: .6875rem; font-weight: 400; line-height: 1.6; white-space: nowrap; }
 .flappy-icon { display: block; width: 1.7em; height: 1.7em; flex: none; object-fit: contain; image-rendering: pixelated; }
 .flappy-title { font-family: "Flappy Pixel", monospace; font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: 400; line-height: 1.6; }
 .flappy-title-link { display: inline-flex; align-items: center; gap: .6em; }

@@ -64,6 +64,6 @@
   .product-navigation.has-menu .product-links a { justify-content: flex-start; min-height: 60px; padding-inline: 0; flex-shrink: 0; transform-origin: left center; }
   .product-navigation.has-menu .nav-rosarium { font-size: clamp(1.25rem, 5.5vw, 1.625rem); }
   .product-navigation.has-menu .nav-book { font-size: clamp(1.75rem, 6.7vw, 2.25rem); }
-  .product-navigation.has-menu .nav-flappy { font-size: clamp(1.25rem, 5.5vw, 1.625rem); }
+  .product-navigation.has-menu .nav-flappy { font-size: clamp(.875rem, 3.8vw, 1.25rem); }
   .product-navigation.has-menu .nav-divider { display: none; }
 }
