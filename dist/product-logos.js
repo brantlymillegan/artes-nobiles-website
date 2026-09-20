@@ -10,6 +10,13 @@ function loadSource(url) {
       if (document.querySelector('parsererror') || document.documentElement.localName !== 'svg') {
         throw new Error('Invalid logo SVG');
       }
+      // ROSARIUM embeds its painted icon. Decode it before replacing the fallback
+      // so the SVG's first visible frame already contains the complete artwork.
+      await Promise.all([...document.querySelectorAll('image')].map(async image => {
+        const raster = new Image();
+        raster.src = image.getAttribute('href') || image.getAttributeNS('http://www.w3.org/1999/xlink', 'href');
+        await raster.decode();
+      }));
       return document.documentElement;
     }));
   }
@@ -24,23 +31,19 @@ for (const icon of document.querySelectorAll('[data-product-logo]')) {
   let playing = false;
   let requested = false;
   let finishTimer;
-  let resetTimer;
 
-  function stop(immediate = false) {
+  function stop() {
     requested = false;
     playing = false;
     clearTimeout(finishTimer);
-    clearTimeout(resetTimer);
     icon.classList.remove('is-logo-playing');
-    if (immediate) layer?.removeAttribute('data-playing');
-    else resetTimer = setTimeout(() => layer?.removeAttribute('data-playing'), 140);
+    layer?.removeAttribute('data-playing');
   }
-  stopAnimations.push(() => stop(true));
+  stopAnimations.push(stop);
 
   function play() {
     if (reducedMotion.matches || document.hidden || playing) return;
     if (!layer) { requested = true; return; }
-    clearTimeout(resetTimer);
     // Removing the state discards the prior CSS timeline, so every replay starts fresh.
     layer.removeAttribute('data-playing');
     layer.getBoundingClientRect();
@@ -64,7 +67,7 @@ for (const icon of document.querySelectorAll('[data-product-logo]')) {
     });
   }
 
-  loadSource(icon.dataset.logoSrc).then(source => {
+  loadSource(icon.dataset.logoSrc).then(async source => {
     const host = document.createElement('span');
     host.className = 'product-logo-motion';
     host.setAttribute('aria-hidden', 'true');
@@ -81,7 +84,10 @@ for (const icon of document.querySelectorAll('[data-product-logo]')) {
     svg.setAttribute('focusable', 'false');
     shadow.append(style, svg);
     icon.append(host);
+    // Let the isolated SVG resolve its masks and layout while the fallback shows.
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
     layer = host;
+    icon.classList.add('is-logo-ready');
     if (requested && [...triggers].some(trigger => trigger.matches(':hover, :focus-visible'))) play();
   }).catch(() => {
     // The original static image remains visible if an animation cannot load.

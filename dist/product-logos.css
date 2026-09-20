@@ -1,15 +1,16 @@
 .product-logo { position: relative; display: block; flex: none; }
-.product-logo > .product-logo-static { display: block; width: 100%; height: 100%; object-fit: contain; opacity: 1; transition: opacity 120ms ease; }
+.product-logo > .product-logo-static { display: block; width: 100%; height: 100%; object-fit: contain; opacity: 1; }
 .rosarium-app-icon.product-logo > .product-logo-static { width: 150%; height: 150%; object-fit: cover; }
-.product-logo-motion { position: absolute; inset: 0; display: block; pointer-events: none; opacity: 0; transition: opacity 120ms ease; }
-.product-logo.is-logo-playing > .product-logo-static { opacity: 0; }
-.product-logo.is-logo-playing > .product-logo-motion { opacity: 1; }
+.product-logo-motion { position: absolute; inset: 0; display: block; pointer-events: none; opacity: 0; }
+/* Keep the prepared SVG visible at rest; hover changes motion, never opacity. */
+.product-logo.is-logo-ready > .product-logo-static { opacity: 0; }
+.product-logo.is-logo-ready > .product-logo-motion { opacity: 1; }
 /* Map each padded animation back onto its original, unchanged icon size. */
 [data-product-logo="christmas-star"] > .product-logo-motion { inset: -8.333333% auto auto -8.333333%; width: 116.666667%; height: 116.666667%; }
 [data-product-logo="flappy-pope"] > .product-logo-motion { inset: -20.833333% auto auto -12.5%; width: 129.166667%; height: 129.166667%; }
 .book-page .book-introduction .book-hero-eyebrow::before { display: none; }
 .hero-book-icon { width: 32px; height: 32px; margin: 0 auto 12px; }
 @media (prefers-reduced-motion: reduce) {
-  .product-logo > .product-logo-static { opacity: 1; transition: none; }
-  .product-logo > .product-logo-motion { opacity: 0; transition: none; }
+  .product-logo.is-logo-ready > .product-logo-static { opacity: 1; }
+  .product-logo.is-logo-ready > .product-logo-motion { opacity: 0; }
 }
