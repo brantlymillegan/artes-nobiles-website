@@ -24,6 +24,8 @@ PUBLIC_FILES = (
     "product-logos.js",
     "assets/product-logo-animations/christmas-star-v3.svg",
     "assets/product-logo-animations/rosarium-v2.svg",
+    "assets/product-logo-animations/rosarium-v3.svg",
+    "assets/product-logo-animations/christmas-star-v4.svg",
     "assets/product-logo-animations/flappy-pope-v2.svg",
     "assets/flappy-pope/icon.svg",
     "assets/flappy-pope/pixel.ttf",
