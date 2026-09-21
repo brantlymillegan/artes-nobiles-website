@@ -81,7 +81,7 @@ function initializeLogo(logo, onLoad) {
 }
 
 document.querySelectorAll('.company-logo').forEach(logo => {
-  initializeLogo(logo, logo === heroLogo);
+  initializeLogo(logo, true);
 });
 
 if (navigation && compactLogo && sentinel) {

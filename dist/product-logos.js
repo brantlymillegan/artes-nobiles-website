@@ -1,6 +1,7 @@
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const sources = new Map();
 const stopAnimations = [];
+const initialAnimations = [];
 
 function loadSource(url) {
   if (!sources.has(url)) {
@@ -30,6 +31,7 @@ for (const icon of document.querySelectorAll('[data-product-logo]')) {
   let layer;
   let playing = false;
   let requested = false;
+  let initialPending = true;
   let finishTimer;
 
   function stop() {
@@ -51,9 +53,13 @@ for (const icon of document.querySelectorAll('[data-product-logo]')) {
     icon.classList.add('is-logo-playing');
     requested = false;
     playing = true;
+    initialPending = false;
     // All supplied loops visibly settle before four seconds, including delayed sparkles.
     finishTimer = setTimeout(() => stop(), 4000);
   }
+  initialAnimations.push(() => {
+    if (initialPending) play();
+  });
 
   for (const trigger of triggers) {
     trigger.addEventListener('pointerenter', event => {
@@ -88,7 +94,8 @@ for (const icon of document.querySelectorAll('[data-product-logo]')) {
     await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
     layer = host;
     icon.classList.add('is-logo-ready');
-    if (requested && [...triggers].some(trigger => trigger.matches(':hover, :focus-visible'))) play();
+    // Play each icon once on arrival, including menu and below-the-fold copies.
+    if (initialPending || (requested && [...triggers].some(trigger => trigger.matches(':hover, :focus-visible')))) play();
   }).catch(() => {
     // The original static image remains visible if an animation cannot load.
     requested = false;
@@ -100,4 +107,5 @@ reducedMotion.addEventListener('change', () => {
 });
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) stopAnimations.forEach(stop => stop());
+  else initialAnimations.forEach(play => play());
 });
