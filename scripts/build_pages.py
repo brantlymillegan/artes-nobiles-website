@@ -28,6 +28,7 @@ PUBLIC_FILES = (
     "assets/product-logo-animations/christmas-star-v4.svg",
     "assets/product-logo-animations/flappy-pope-v2.svg",
     "assets/product-logo-animations/flappy-pope-v3.svg",
+    "assets/product-logo-animations/flappy-pope-v4.svg",
     "assets/flappy-pope/icon.svg",
     "assets/flappy-pope/pixel.ttf",
     "assets/flappy-pope/FONT-LICENSE.txt",
