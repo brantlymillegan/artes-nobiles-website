@@ -1,4 +1,5 @@
 import { mountAnimatedLogo } from './assets/logo-motion.js';
+import { onFirstAppearance } from './logo-visibility.js?v=1';
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const heroLogo = document.querySelector('.site-header .company-logo');
@@ -11,7 +12,6 @@ let suppressHeroHover = false;
 function initializeLogo(logo, onLoad) {
   const controllers = [];
   let ready = false;
-  let initialPending = onLoad;
 
   function settle() {
     if (controllers.some(controller => controller.isPlaying)) return;
@@ -19,15 +19,17 @@ function initializeLogo(logo, onLoad) {
   }
 
   function play(initial = false) {
-    if (!ready || document.hidden || reducedMotion.matches) return;
-    if (logo.classList.contains('is-playing')) return;
-    initialPending = false;
+    if (!ready || document.hidden || reducedMotion.matches) return false;
+    if (logo.classList.contains('is-playing')) return false;
+    firstAppearance?.cancel();
     logo.classList.toggle('is-initial', initial);
     logo.classList.add('is-playing');
     // Both themes and all logo instances use the original, independently scoped SVGs.
     controllers.forEach(controller => controller.play());
     settle();
+    return true;
   }
+  const firstAppearance = onLoad ? onFirstAppearance(logo, () => play(true)) : null;
 
   logo.addEventListener('pointerenter', event => {
     if (event.pointerType === 'mouse' && !(logo === heroLogo && suppressHeroHover)) play();
@@ -44,9 +46,6 @@ function initializeLogo(logo, onLoad) {
   logo.addEventListener('focusin', () => {
     if (logo.matches(':focus-visible')) play();
   });
-  document.addEventListener('visibilitychange', () => {
-    if (!document.hidden && initialPending) play(true);
-  });
 
   async function initialize() {
     const layers = [...logo.querySelectorAll('.company-logo-motion')];
@@ -58,6 +57,7 @@ function initializeLogo(logo, onLoad) {
 
     // Keep the static logos if either animation asset is unavailable.
     if (results.some(result => result.status === 'rejected')) {
+      firstAppearance?.cancel();
       results.forEach(result => {
         if (result.status === 'fulfilled') result.value.destroy();
       });
@@ -73,7 +73,7 @@ function initializeLogo(logo, onLoad) {
     });
     ready = true;
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      if (initialPending) play(true);
+      firstAppearance?.check();
     }));
   }
 

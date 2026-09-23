@@ -22,6 +22,7 @@ PUBLIC_FILES = (
     "navigation.js",
     "product-logos.css",
     "product-logos.js",
+    "logo-visibility.js",
     "assets/product-logo-animations/christmas-star-v3.svg",
     "assets/product-logo-animations/rosarium-v2.svg",
     "assets/product-logo-animations/rosarium-v3.svg",

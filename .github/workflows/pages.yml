@@ -43,6 +43,7 @@ jobs:
           node --check dist/logo.js
           node --check dist/navigation.js
           node --check dist/product-logos.js
+          node --check dist/logo-visibility.js
           node --check dist/book-reader.js
           node --check dist/rosarium-video.js
           node --check dist/flappy-video.js
