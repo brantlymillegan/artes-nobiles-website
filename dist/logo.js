@@ -1,4 +1,4 @@
-import { mountAnimatedLogo } from './assets/logo-motion.js';
+import { mountAnimatedLogo } from './assets/logo-motion.js?v=2';
 import { onFirstAppearance } from './logo-visibility.js?v=1';
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');

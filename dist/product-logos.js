@@ -12,6 +12,9 @@ function loadSource(url) {
       if (document.querySelector('parsererror') || document.documentElement.localName !== 'svg') {
         throw new Error('Invalid logo SVG');
       }
+      // Animation production notes must not become searchable page text.
+      document.querySelectorAll('title, desc, metadata').forEach(node => node.remove());
+      document.documentElement.removeAttribute('aria-labelledby');
       // ROSARIUM embeds its painted icon. Decode it before replacing the fallback
       // so the SVG's first visible frame already contains the complete artwork.
       await Promise.all([...document.querySelectorAll('image')].map(async image => {

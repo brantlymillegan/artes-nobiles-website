@@ -105,6 +105,8 @@ export async function mountAnimatedLogo(container, src, options = {}) {
     throw new DOMException('A newer logo mount replaced this request.', 'AbortError');
   }
   const svg = document.importNode(documentSvg.documentElement, true);
+  // Decorative asset notes are not page content; the control supplies its name.
+  svg.querySelectorAll('title, desc, metadata').forEach(node => node.remove());
   svg.classList.remove('is-playing');
   svg.setAttribute('aria-label', 'Artes Nobiles');
   svg.removeAttribute('aria-labelledby');
