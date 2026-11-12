@@ -24,7 +24,8 @@
   --navigation-height: 72px;
   --background: #f6f4ef;
   --ink: #202521;
-  --book-title-ink: #21483d;
+  --book-accent: #3B6958;
+  --book-title-ink: var(--book-accent);
   --muted: #626660;
   --rule: #d4d5ce;
   --brass: #947d51;

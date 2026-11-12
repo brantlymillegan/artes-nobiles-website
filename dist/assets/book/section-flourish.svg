@@ -34,7 +34,7 @@
       </g>
       <!-- Faceted evergreen core; only the two central leaf accents remain. -->
       <g fill-rule="evenodd">
-        <path fill="#21483D" d="M20 43 L21.9 47 L20 51 L18.1 47 Z"/>
+        <path fill="#3B6958" d="M20 43 L21.9 47 L20 51 L18.1 47 Z"/>
         <path fill="#B58B4B" d="M17 151 C11.1 151 7.1 155.2 6.3 160.6 C11.8 159.5 15.7 156.4 17 151 Z M14.7 153.1 L8.3 158.6 L14.96 153.43 Z"/>
         <path fill="#B58B4B" d="M23 151 C28.9 151 32.9 155.2 33.7 160.6 C28.2 159.5 24.3 156.4 23 151 Z M25.3 153.1 L31.7 158.6 L25.04 153.43 Z"/>
       </g>

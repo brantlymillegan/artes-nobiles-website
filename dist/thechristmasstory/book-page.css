@@ -1,4 +1,4 @@
-.book-page { --navigation-height: 84px; --menu-background: #e6e2da; --book-heading: #21483d; --book-subtitle: #982f3b; }
+.book-page { --navigation-height: 84px; --menu-background: #e6e2da; --book-heading: var(--book-accent); --book-subtitle: #982f3b; }
 :root[data-theme="dark"] .book-page { --menu-background: #343d49; --book-heading: var(--ink); --book-subtitle: var(--brass); }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) .book-page { --menu-background: #343d49; --book-heading: var(--ink); --book-subtitle: var(--brass); }
@@ -20,7 +20,7 @@
 .showcase-title { margin: 22px 0 0; font-size: clamp(2.25rem, 6.5vw, 5.75rem); }
 .book-introduction .book-status { margin-top: 18px; }
 .book-lede { max-width: 600px; margin: 28px auto 0; font-size: clamp(1rem, 1.45vw, 1.125rem); line-height: 1.8; color: var(--muted); text-wrap: pretty; }
-.book-section-divider { display: block; width: min(220px, 60%); height: auto; aspect-ratio: 40 / 9; margin: clamp(24px, 3vw, 36px) auto; padding: 0; border: 0; background: url("/assets/book/bottom-flourish.svg") center / contain no-repeat; }
+.book-section-divider { display: block; width: min(220px, 60%); height: auto; aspect-ratio: 40 / 9; margin: clamp(24px, 3vw, 36px) auto; padding: 0; border: 0; background: url("/assets/book/bottom-flourish.svg?v=2") center / contain no-repeat; }
 .book-page .reader-presentation { padding: 0; border-top: 0; margin-top: 0; }
 .book-page .reader-presentation .christmas-layout { display: block; }
 .book-page .reader-presentation .book-reader { width: 100%; margin: 0; }
