@@ -24,6 +24,26 @@
 .book-reader:not(.reader-portrait)[data-cover="back"] .reader-flip { transform: translateX(25%); }
 .reader-page { overflow: hidden; background: #faf6ef; box-shadow: 0 0 0 1px #21372f26; }
 .reader-page img { width: 100%; height: 100%; max-width: none; object-fit: fill; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+/* The final case has a 12 mm recessed joint within each 287 mm cover panel.
+   Keep the relief on the cover face so it follows the hardcover as it turns. */
+.reader-cover::after, .reader-page[data-cover-face]::after {
+  --hinge-direction: 90deg;
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: calc(100% * 12 / 287);
+  pointer-events: none;
+  background: linear-gradient(var(--hinge-direction),
+    rgb(255 255 255 / .12) 0%,
+    rgb(255 255 255 / .025) 15%,
+    rgb(0 0 0 / .12) 34%,
+    rgb(0 0 0 / .3) 55%,
+    rgb(0 0 0 / .15) 73%,
+    rgb(255 255 255 / .1) 91%,
+    rgb(255 255 255 / 0) 100%);
+}
+.reader-page[data-cover-face="back"]::after { --hinge-direction: 270deg; left: auto; right: 0; }
 .reader-toolbar { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
 .reader-toolbar[hidden], .reader-error[hidden] { display: none; }
 .reader-control { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; padding: 9px 13px; border: 1px solid var(--rule); border-radius: 3px; background: transparent; color: var(--ink); font: inherit; font-size: .875rem; cursor: pointer; transition: background 160ms, color 160ms; }

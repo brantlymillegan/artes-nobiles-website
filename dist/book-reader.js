@@ -211,6 +211,7 @@ if (reader) {
         const element = document.createElement('div');
         element.className = 'reader-page';
         element.dataset.density = page.density === 'hard' ? 'hard' : 'soft';
+        if (page.kind === 'cover') element.dataset.coverFace = index === 0 ? 'front' : 'back';
         element.setAttribute('aria-hidden', 'true');
         const image = document.createElement('img');
         image.width = page.width; image.height = page.height;
