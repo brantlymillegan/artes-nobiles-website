@@ -17,7 +17,7 @@ if (reader) {
   const desktop = matchMedia('(min-width: 960px)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const fixedLayout = reader.dataset.readerLayout === 'fixed';
-  const assetRoot = new URL('./assets/book/152/', import.meta.url);
+  const assetRoot = new URL('./assets/book/254/', import.meta.url);
   let manifest, flip, initialized, operation = Promise.resolve();
   let generation = 0;
   let state = 'closed';

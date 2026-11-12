@@ -60,7 +60,7 @@ PUBLIC_FILES = (
     "assets/rosarium-app-icon.png",
     "assets/vendor/page-flip-2.0.7.js",
     "assets/vendor/page-flip-LICENSE.txt",
-    "assets/book/152/manifest.json",
+    "assets/book/254/manifest.json",
     "assets/book/section-flourish.svg",
     "assets/book/bottom-flourish.svg",
     "assets/book/title-star.svg",
@@ -122,11 +122,11 @@ PUBLIC_FILES = (
 )
 
 
-BOOK_DIRECTORY = "assets/book/152/"
+BOOK_DIRECTORY = "assets/book/254/"
 book_manifest = json.loads((SOURCE / BOOK_DIRECTORY / "manifest.json").read_text())
 book_pages = book_manifest["pages"]
-if book_manifest["edition"] != "Draft 152 — Canonical":
-    raise ValueError("The reader must use the approved Canonical 152 edition.")
+if book_manifest["edition"] != "Draft 254 — Final print":
+    raise ValueError("The reader must use the approved final-print Draft 254 edition.")
 if len(book_pages) != 60 or book_manifest["titlePageIndex"] != 6:
     raise ValueError("The reader must include all 52 printed pages, six endpaper faces, and both covers.")
 expected_book_order = [f"page-{i:03}.webp" for i in range(60)]
@@ -148,7 +148,7 @@ if len(set(book_assets)) != len(book_assets):
 PUBLIC_FILES += tuple(book_assets)
 
 # Keep earlier editions' URLs valid for visitors with a reader already open.
-for edition in (126, 137):
+for edition in (126, 137, 152):
     directory = f"assets/book/{edition}/"
     previous_pages = json.loads((SOURCE / directory / "manifest.json").read_text())["pages"]
     PUBLIC_FILES += (directory + "manifest.json",) + tuple(directory + page["src"] for page in previous_pages)
