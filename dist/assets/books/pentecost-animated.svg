@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" class="an-pentecost-flame-animation"><title>The Pentecost Story — paper-flame-24.svg</title><desc>The approved gold flame rises immediately, with licking tongues and ascending embers. A single 3.6-second flourish returns to the exact original artwork.</desc><style>
+
+  .an-pentecost-flame-animation .flame-gold, .an-pentecost-flame-animation .flame-heart { transform-box: fill-box; transform-origin: 50% 100%; animation-duration: 3.6s; animation-timing-function: ease-in-out; animation-fill-mode: both; }
+  .an-pentecost-flame-animation .flame-gold { animation-name: pentecost-flame; }
+  .an-pentecost-flame-animation .flame-heart { animation-name: pentecost-heart; }
+  .an-pentecost-flame-animation .flame-tongue { opacity: 0; transform-box: view-box; transform-origin: 24px 42px; animation: pentecost-tongue 3.6s ease-in-out both; }
+  .an-pentecost-flame-animation .flame-tongue-right { animation-name: pentecost-tongue-right; }
+  .an-pentecost-flame-animation .flame-ember { opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; animation: pentecost-ember 3.6s ease-out both; }
+  .an-pentecost-flame-animation .flame-ember-right { animation-name: pentecost-ember-right; }
+  @keyframes pentecost-flame {
+    0% { transform: rotate(0deg) scale(1,1); animation-timing-function: cubic-bezier(.16,1,.3,1); }
+    5% { transform: rotate(-4deg) scale(.94,1.5); }
+    14% { transform: rotate(6deg) scale(1.02,1.27); }
+    26% { transform: rotate(-6.5deg) scale(.9,1.46); }
+    39% { transform: rotate(4.5deg) scale(1.035,1.2); }
+    52% { transform: rotate(-4deg) scale(.94,1.36); }
+    65% { transform: rotate(3deg) scale(1.02,1.12); }
+    77% { transform: rotate(-2deg) scale(.97,1.2); }
+    89% { transform: rotate(1deg) scale(1.01,1.04); }
+    97%, 100% { transform: rotate(0deg) scale(1,1); }
+  }
+  @keyframes pentecost-heart {
+    0% { transform: rotate(0deg) scale(1,1); opacity: 1; animation-timing-function: cubic-bezier(.16,1,.3,1); }
+    4% { transform: rotate(5deg) scale(.87,1.55); opacity: .94; }
+    13% { transform: rotate(-6deg) scale(1.04,1.18); opacity: 1; }
+    25% { transform: rotate(5deg) scale(.88,1.48); opacity: .88; }
+    38% { transform: rotate(-4deg) scale(1.06,1.1); opacity: 1; }
+    51% { transform: rotate(3.5deg) scale(.92,1.35); opacity: .93; }
+    64% { transform: rotate(-2.5deg) scale(1.04,1.08); opacity: 1; }
+    76% { transform: rotate(1.5deg) scale(.97,1.2); opacity: .96; }
+    90%, 100% { transform: rotate(0deg) scale(1,1); opacity: 1; }
+  }
+  @keyframes pentecost-tongue {
+    0% { opacity: 0; transform: scale(.9,.72); animation-timing-function: cubic-bezier(.16,1,.3,1); }
+    5% { opacity: .92; transform: rotate(-5deg) scale(1,1.34); }
+    15% { opacity: .5; transform: rotate(4deg) scale(.92,1.05); }
+    28% { opacity: .9; transform: rotate(-4deg) scale(.95,1.4); }
+    42% { opacity: .42; transform: rotate(3deg) scale(.9,1.1); }
+    54% { opacity: .8; transform: rotate(-3deg) scale(.94,1.29); }
+    69% { opacity: .3; transform: rotate(2deg) scale(.86,1.05); }
+    80% { opacity: .6; transform: rotate(-2deg) scale(.9,1.2); }
+    95%, 100% { opacity: 0; transform: scale(.8,.92); }
+  }
+  @keyframes pentecost-tongue-right {
+    0% { opacity: 0; transform: scale(.9,.8); animation-timing-function: cubic-bezier(.16,1,.3,1); }
+    6% { opacity: .8; transform: rotate(4deg) scale(.95,1.22); }
+    19% { opacity: .95; transform: rotate(-3deg) scale(.94,1.38); }
+    32% { opacity: .45; transform: rotate(4deg) scale(.9,1.08); }
+    45% { opacity: .85; transform: rotate(-3deg) scale(.94,1.3); }
+    59% { opacity: .4; transform: rotate(2deg) scale(.88,1.04); }
+    72% { opacity: .7; transform: rotate(-2deg) scale(.92,1.2); }
+    94%, 100% { opacity: 0; transform: scale(.8,.9); }
+  }
+  @keyframes pentecost-ember {
+    0%, 3% { opacity: 0; transform: translate(0,0) scale(.35); }
+    7% { opacity: .95; transform: translate(-1px,-3px) scale(1); }
+    26% { opacity: 0; transform: translate(1px,-17px) scale(.15); }
+    42% { opacity: 0; transform: translate(0,0) scale(.3); }
+    49% { opacity: .85; transform: translate(-1px,-3px) scale(.9); }
+    70%, 100% { opacity: 0; transform: translate(1px,-16px) scale(.15); }
+  }
+  @keyframes pentecost-ember-right {
+    0%, 12% { opacity: 0; transform: translate(0,0) scale(.3); }
+    17% { opacity: .9; transform: translate(1px,-3px) scale(1); }
+    38% { opacity: 0; transform: translate(-1px,-16px) scale(.15); }
+    58% { opacity: 0; transform: translate(0,0) scale(.3); }
+    64% { opacity: .75; transform: translate(1px,-3px) scale(.85); }
+    86%, 100% { opacity: 0; transform: translate(-1px,-14px) scale(.15); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .an-pentecost-flame-animation .flame-gold, .an-pentecost-flame-animation .flame-heart,
+    .an-pentecost-flame-animation .flame-tongue, .an-pentecost-flame-animation .flame-ember { animation: none; }
+  }
+
+</style>
+<g aria-hidden="true" fill="#C7A34F">
+  <path class="flame-tongue" d="M18 42 C10 37 8 31 12 23 C14 19 15 16 13 11 C22 17 23 25 19 30 C17 33 18 37 22 39 Z"/>
+  <path class="flame-tongue flame-tongue-right" d="M30 42 C37 36 40 31 37 23 C34 18 33 14 35 8 C27 14 25 22 30 28 C33 33 31 37 27 39 Z"/>
+</g>
+<g transform="translate(24.000000000000 24.000000000000) scale(0.387173797681) translate(-57.819997016434 -59.656388215836)" data-motif="approved-golden-flame-06"><path class="flame-gold" fill="#C7A34F" d="M62 8 C65 28 84 35 91 53 C103 80 88 108 62 111 C35 114 17 95 21 72 C23 58 33 45 38 33 C39 48 44 54 47 55 C42 34 52 23 62 8 Z" />
+<path class="flame-heart" fill="#9D3035" d="M60 45 C63 59 77 69 78 82 C80 96 71 104 60 104 C48 104 40 94 43 82 C45 73 51 67 52 59 C54 65 56 69 59 72 C54 60 56 52 60 45 Z" />
+</g>
+<g aria-hidden="true" fill="#DDBB68">
+  <path class="flame-ember" d="M17 10 C18 12 19 13 18 15 C17 17 14.5 16.5 15 14.5 C15.5 13 17 12 17 10 Z"/>
+  <path class="flame-ember flame-ember-right" d="M31 8 C32 10 33 11 32 13 C31 15 28.5 14.5 29 12.5 C29.5 11 31 10 31 8 Z"/>
+</g>
+</svg>

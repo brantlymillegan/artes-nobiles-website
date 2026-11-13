@@ -141,6 +141,7 @@ p, h1, h2 { margin: 0; }
 .book-the { display: block; flex: 0 0 auto; font-size: .55em; font-style: italic; font-weight: 400; letter-spacing: 0; line-height: 1; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .nav-book { font-size: 1.125rem; padding-bottom: calc(6px + .233em); }
+.nav-book-store { font-family: "Noto Serif Rosarium", Georgia, serif; font-size: 1.125rem; font-weight: 500; white-space: nowrap; }
 .nav-book, .book-title-link { color: var(--book-title-ink); }
 .nav-book-icon { width: 1.5em; height: 1.5em; flex: none; margin-inline-end: .1em; object-fit: contain; }
 .book-title-icon { width: 1.2em; height: 1.2em; flex: none; margin-inline-end: .1em; object-fit: contain; }
@@ -179,6 +180,32 @@ p, h1, h2 { margin: 0; }
 .christmas-visual .film-error[hidden] { display: none; }
 .christmas-visual .film-error { padding-top: 16px; font-size: .875rem; line-height: 1.6; color: var(--muted); }
 .christmas-visual .film-error a { text-decoration: underline; }
+.catalog-book-visual { display: block; width: min(640px, 100%); }
+.catalog-cover-link { display: block; width: 100%; transform-origin: center; transition: transform .32s cubic-bezier(.2,.7,.2,1); }
+.catalog-cover-link img { width: 100%; height: auto; box-shadow: 0 2px 3px #00000014, 0 28px 30px -22px #00000066; }
+.catalog-book-title { padding-bottom: .233em; font-size: clamp(2rem, 4.2vw, 2.85rem); font-weight: 400; line-height: 1.2; }
+.catalog-book-link { display: flex; align-items: center; justify-content: center; gap: .22em; color: var(--catalog-title-color, var(--ink)); transform-origin: center; transition: color .18s, transform .32s cubic-bezier(.2,.7,.2,1); }
+.catalog-book-link:hover, .catalog-book-link:focus-visible { color: var(--brass); }
+.good-friday-product { --catalog-title-color: #6b3447; }
+.resurrection-product { --catalog-title-color: #314b70; }
+.pentecost-product { --catalog-title-color: #9d3035; }
+:root[data-theme="dark"] .catalog-book { --catalog-title-color: var(--ink); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .catalog-book { --catalog-title-color: var(--ink); }
+}
+.catalog-book-symbol { width: 1.2em; height: 1.2em; flex: none; }
+/* Match the native title artwork's main letter bodies, excluding descenders. */
+.catalog-heading-art { position: relative; display: block; flex: 1 1 auto; min-width: 0; max-width: 100%; }
+.catalog-title-mask, .catalog-resurrection-the { display: block; background: currentColor; -webkit-mask-image: var(--title-mask); mask-image: var(--title-mask); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; mask-mode: alpha; }
+.catalog-title-mask { position: absolute; left: 0; width: 100%; }
+.catalog-heading-art--good-friday { width: 9.091360382em; aspect-ratio: 560 / 45.828125; --title-mask: url("/assets/books/good-friday-title.svg"); }
+.catalog-heading-art--good-friday .catalog-title-mask { aspect-ratio: 560 / 66; top: calc(-100% * 4.484375 / 45.828125); }
+.catalog-heading-art--pentecost { width: 7.979425445em; aspect-ratio: 490 / 45.6875; --title-mask: url("/assets/books/pentecost-title.svg"); }
+.catalog-heading-art--pentecost .catalog-title-mask { aspect-ratio: 490 / 65; top: calc(-100% * 1.75 / 45.6875); }
+.catalog-resurrection-title { display: grid; grid-template-columns: minmax(0, .749761383fr) minmax(0, 7.398fr); align-items: center; gap: calc(100% * .22 / 8.367761383); width: 8.367761383em; max-width: 100%; min-width: 0; flex: 1 1 auto; }
+.catalog-resurrection-the { aspect-ratio: 1363.20251465 / 735.411865234; --title-mask: url("/assets/books/resurrection-the.svg"); }
+.catalog-resurrection-main { position: relative; min-width: 0; aspect-ratio: 7398 / 740; --title-mask: url("/assets/books/resurrection-title.svg"); }
+.catalog-resurrection-main .catalog-title-mask { top: 0; aspect-ratio: 7398 / 973; }
 .product-details { width: min(540px, 100%); margin-inline: auto; }
 .rosarium-title { font-size: clamp(1.9rem, 4vw, 2.5rem); line-height: 1.3; }
 .rosarium-title-link { display: inline-flex; align-items: center; gap: .42em; }
@@ -208,6 +235,9 @@ p, h1, h2 { margin: 0; }
   .company-logo:hover,
   .rosarium-visual:hover,
   .christmas-film-frame:hover,
+  .catalog-cover-link:hover,
+  .catalog-book-link:hover,
+  .nav-book-store:hover,
   .nav-flappy:hover,
   .flappy-title-link:hover,
   .flappy-preview-link:hover,
@@ -221,6 +251,9 @@ p, h1, h2 { margin: 0; }
   .google-play-badge:focus-visible img { transform: translateY(-3px); }
   .rosarium-visual:focus-within,
   .christmas-film-frame:focus-within,
+  .catalog-cover-link:focus-visible,
+  .catalog-book-link:focus-visible,
+  .nav-book-store:focus-visible,
   .nav-flappy:focus-visible,
   .flappy-title-link:focus-visible,
   .flappy-preview-link:focus-visible,
@@ -294,6 +327,7 @@ p, h1, h2 { margin: 0; }
   .button { gap: 18px; padding-inline: 17px; }
   .product + .product { padding-top: 34px; }
   .book-title { font-size: clamp(1.75rem, 6.8vw, 2.5rem); }
+  .catalog-book-title { font-size: clamp(1.75rem, 6.8vw, 2.5rem); }
   .site-footer { margin-top: 30px; }
   .footer-wordmark { font-size: .9375rem; }
 }
