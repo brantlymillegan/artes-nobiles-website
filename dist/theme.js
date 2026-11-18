@@ -15,6 +15,7 @@
   let mobile;
 
   function readPreference() {
+    if (window.anAppearancePreference) return window.anAppearancePreference.read();
     try {
       const saved = window.localStorage.getItem(storageKey);
       return saved === "light" || saved === "dark" ? saved : "system";
@@ -80,7 +81,8 @@
 
   function chooseTheme(value, focusTarget = trigger) {
     theme = value;
-    try {
+    if (window.anAppearancePreference) window.anAppearancePreference.write(theme);
+    else try {
       if (theme === "system") window.localStorage.removeItem(storageKey);
       else window.localStorage.setItem(storageKey, theme);
     } catch {
@@ -92,11 +94,19 @@
     focusTarget.focus({ preventScroll: true });
   }
 
-  window.addEventListener("storage", event => {
-    if (event.key !== storageKey && event.key !== null) return;
-    theme = readPreference();
+  function refreshPreference() {
+    const stored = readPreference();
+    if (theme === stored) return;
+    theme = stored;
     applyDocumentTheme();
     if (control) renderControl();
+  }
+  window.addEventListener("pageshow", refreshPreference);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) refreshPreference();
+  });
+  window.addEventListener("storage", event => {
+    if (event.key === storageKey || event.key === null) refreshPreference();
   });
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -133,7 +143,7 @@
     renderControl();
     control.hidden = false;
 
-    trigger.addEventListener("click", () => setOpenMode("pinned"));
+    trigger.addEventListener("click", () => setOpenMode(openMode === "pinned" ? "closed" : "pinned"));
     control.addEventListener("pointerenter", event => {
       if (event.pointerType === "mouse" && openMode !== "pinned") setOpenMode("hover");
     });

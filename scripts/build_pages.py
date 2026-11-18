@@ -17,6 +17,19 @@ PUBLIC_FILES = (
     "thechristmasstory/book-page.css",
     "thechristmasstory/book-film.js",
     "thechristmasstory/book-navigation.js",
+    "assets/home-previews-v1/book-dark-small.mp4",
+    "assets/home-previews-v1/book-dark.mp4",
+    "assets/home-previews-v1/book-dark.webp",
+    "assets/home-previews-v1/book-light-small.mp4",
+    "assets/home-previews-v1/book-light.mp4",
+    "assets/home-previews-v1/book-light.webp",
+    "assets/home-previews-v1/flappy-dark-small.mp4",
+    "assets/home-previews-v1/flappy-light-small.mp4",
+    "assets/home-previews-v1/phone-mask.png",
+    "assets/home-previews-v1/rosarium-dark-small.mp4",
+    "assets/home-previews-v1/rosarium-dark.webp",
+    "assets/home-previews-v1/rosarium-light-small.mp4",
+    "assets/home-previews-v1/rosarium-light.webp",
     "assets/books/good-friday-animated.svg",
     "assets/books/good-friday-cover.webp",
     "assets/books/good-friday-symbol.svg",
@@ -48,6 +61,7 @@ PUBLIC_FILES = (
     "assets/flappy-pope/FONT-LICENSE.txt",
     "assets/flappy-pope/preview-light.png",
     "assets/flappy-pope/preview-dark.png",
+    "home-previews.js",
     "flappy-video.js",
     "assets/flappy-pope/film-v1/light.mp4",
     "assets/flappy-pope/film-v1/dark.mp4",
@@ -131,6 +145,7 @@ PUBLIC_FILES = (
     "assets/dm-sans-regular.ttf",
     "assets/noto-serif-variable.ttf",
     "assets/favicon.svg",
+    "assets/appearance-preference.js",
     "assets/google-play-badge.svg",
 )
 
@@ -177,7 +192,7 @@ class PageReferences(HTMLParser):
         attributes = dict(attributes)
         if "id" in attributes:
             self.ids.add(attributes["id"])
-        for name in ("href", "src", "poster", "data-logo-src", "data-light-src", "data-dark-src", "data-light-poster", "data-dark-poster"):
+        for name in ("href", "src", "poster", "data-logo-src", "data-light-src", "data-dark-src", "data-light-small-src", "data-dark-small-src", "data-light-poster", "data-dark-poster"):
             if attributes.get(name):
                 self.references.append(attributes[name])
         if tag == "meta" and (attributes.get("property") or attributes.get("name")) in {

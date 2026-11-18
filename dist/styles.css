@@ -165,7 +165,7 @@ p, h1, h2 { margin: 0; }
 .product-visual { position: relative; display: flex; align-items: center; justify-content: center; margin: 25px auto 32px; }
 .rosarium-visual { width: fit-content; height: 390px; max-width: 100%; }
 .rosarium-video-link { display: block; height: 100%; aspect-ratio: 519 / 1073; flex: none; filter: drop-shadow(3px 7px 5px #18251f1a); }
-.rosarium-video-frame { display: block; position: relative; width: 100%; height: 100%; overflow: hidden; mask-image: url("assets/rosarium-video-poster-light.png"); mask-size: 100.192678% 100.093197%; mask-repeat: no-repeat; mask-mode: alpha; }
+.rosarium-video-frame { display: block; position: relative; width: 100%; height: 100%; overflow: hidden; mask-image: url("assets/home-previews-v1/phone-mask.png"); mask-size: 100.192678% 100.093197%; mask-repeat: no-repeat; mask-mode: alpha; }
 /* The original MP4 has 40px left and 63px top padding around the 519×1073
    Samsung phone. Crop the export padding without changing the phone's height. */
 .rosarium-video { position: absolute; max-width: none; width: 115.606936%; height: 111.835974%; left: -7.707129%; top: -5.871389%; opacity: 0; pointer-events: none; }
@@ -175,7 +175,13 @@ p, h1, h2 { margin: 0; }
 .rosarium-video-poster.app-screen-dark { display: var(--app-dark-display); }
 .christmas-visual { display: block; width: min(640px, 100%); }
 .christmas-film-frame { display: block; position: relative; aspect-ratio: 22 / 17; overflow: hidden; background: var(--background); transform-origin: center; transition: transform .32s cubic-bezier(.2,.7,.2,1); }
-.christmas-film-frame video { display: block; width: 100%; height: 100%; object-fit: contain; background: var(--background); pointer-events: none; }
+.christmas-film-frame { background-image: url("assets/home-previews-v1/book-light.webp"); background-size: contain; background-repeat: no-repeat; background-position: center; }
+:root[data-theme="dark"] .christmas-film-frame { background-image: url("assets/home-previews-v1/book-dark.webp"); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .christmas-film-frame { background-image: url("assets/home-previews-v1/book-dark.webp"); }
+}
+.christmas-film-frame video.is-ready { opacity: 1; }
+.christmas-film-frame video { opacity: 0; display: block; width: 100%; height: 100%; object-fit: contain; background: var(--background); pointer-events: none; }
 .christmas-film-frame:focus-visible { outline-offset: -6px; }
 .christmas-visual .film-error[hidden] { display: none; }
 .christmas-visual .film-error { padding-top: 16px; font-size: .875rem; line-height: 1.6; color: var(--muted); }
@@ -183,8 +189,8 @@ p, h1, h2 { margin: 0; }
 .catalog-book-visual { display: block; width: min(640px, 100%); }
 .catalog-cover-link { display: block; width: 100%; transform-origin: center; transition: transform .32s cubic-bezier(.2,.7,.2,1); }
 .catalog-cover-link img { width: 100%; height: auto; box-shadow: 0 2px 3px #00000014, 0 28px 30px -22px #00000066; }
-.catalog-book-title { padding-bottom: .233em; font-size: clamp(2rem, 4.2vw, 2.85rem); font-weight: 400; line-height: 1.2; }
-.catalog-book-link { display: flex; align-items: center; justify-content: center; gap: .22em; color: var(--catalog-title-color, var(--ink)); transform-origin: center; transition: color .18s, transform .32s cubic-bezier(.2,.7,.2,1); }
+.catalog-book-title { padding-bottom: .233em; font-weight: 400; line-height: 1.2; }
+.catalog-book-link { display: inline-flex; align-items: center; justify-content: center; gap: .22em; color: var(--catalog-title-color, var(--ink)); transform-origin: center; transition: color .18s, transform .32s cubic-bezier(.2,.7,.2,1); }
 .catalog-book-link:hover, .catalog-book-link:focus-visible { color: var(--brass); }
 .good-friday-product { --catalog-title-color: #6b3447; }
 .resurrection-product { --catalog-title-color: #314b70; }
@@ -195,14 +201,14 @@ p, h1, h2 { margin: 0; }
 }
 .catalog-book-symbol { width: 1.2em; height: 1.2em; flex: none; }
 /* Match the native title artwork's main letter bodies, excluding descenders. */
-.catalog-heading-art { position: relative; display: block; flex: 1 1 auto; min-width: 0; max-width: 100%; }
+.catalog-heading-art { position: relative; display: block; flex: none; }
 .catalog-title-mask, .catalog-resurrection-the { display: block; background: currentColor; -webkit-mask-image: var(--title-mask); mask-image: var(--title-mask); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; mask-mode: alpha; }
 .catalog-title-mask { position: absolute; left: 0; width: 100%; }
 .catalog-heading-art--good-friday { width: 9.091360382em; aspect-ratio: 560 / 45.828125; --title-mask: url("/assets/books/good-friday-title.svg"); }
 .catalog-heading-art--good-friday .catalog-title-mask { aspect-ratio: 560 / 66; top: calc(-100% * 4.484375 / 45.828125); }
 .catalog-heading-art--pentecost { width: 7.979425445em; aspect-ratio: 490 / 45.6875; --title-mask: url("/assets/books/pentecost-title.svg"); }
 .catalog-heading-art--pentecost .catalog-title-mask { aspect-ratio: 490 / 65; top: calc(-100% * 1.75 / 45.6875); }
-.catalog-resurrection-title { display: grid; grid-template-columns: minmax(0, .749761383fr) minmax(0, 7.398fr); align-items: center; gap: calc(100% * .22 / 8.367761383); width: 8.367761383em; max-width: 100%; min-width: 0; flex: 1 1 auto; }
+.catalog-resurrection-title { display: inline-grid; grid-template-columns: .749761383em 7.398em; align-items: center; gap: .22em; flex: none; }
 .catalog-resurrection-the { aspect-ratio: 1363.20251465 / 735.411865234; --title-mask: url("/assets/books/resurrection-the.svg"); }
 .catalog-resurrection-main { position: relative; min-width: 0; aspect-ratio: 7398 / 740; --title-mask: url("/assets/books/resurrection-title.svg"); }
 .catalog-resurrection-main .catalog-title-mask { top: 0; aspect-ratio: 7398 / 973; }
@@ -263,7 +269,17 @@ p, h1, h2 { margin: 0; }
   .product-actions .button:focus-visible,
   .nav-book:focus-visible { transform: scale(1.04); }
 }
-.book-title { font-size: clamp(2rem, 4.2vw, 2.85rem); }
+/* Preserve the native proportions of each title at one common type size. */
+.book-title, .catalog-book-title { font-size: 1.75rem; }
+@media (min-width: 840px) {
+  .book-title, .catalog-book-title { font-size: 2rem; }
+}
+@media (min-width: 1100px) {
+  .book-title, .catalog-book-title { font-size: 2.5rem; }
+}
+@media (max-width: 359px) {
+  .catalog-book-title { margin-inline: -8px; }
+}
 .book-detail { margin-top: 13px; color: var(--muted); font-size: .875rem; line-height: 1.8; }
 .store-status, .book-status { font-size: .8125rem; letter-spacing: .14em; line-height: 1.6; color: var(--muted); }
 .book-status { margin-top: 12px; }
@@ -289,7 +305,7 @@ p, h1, h2 { margin: 0; }
 .theme-trigger-symbol svg { animation: theme-arrive 200ms ease both; }
 @keyframes theme-arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-@media (min-width: 960px) {
+@media (min-width: 720px) {
   .product {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -307,14 +323,26 @@ p, h1, h2 { margin: 0; }
   .product-actions { align-items: flex-start; }
 }
 
+@media (min-width: 601px) and (max-width: 719px) {
+  .christmas-visual, .catalog-book-visual, .flappy-visual { max-width: 440px; }
+}
+@media (min-width: 720px) and (max-width: 959px) {
+  main.container { width: 92%; }
+  .product {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+    column-gap: 24px; padding-block: 40px;
+  }
+  .product + .product { padding-top: 40px; }
+  .rosarium-visual { height: 340px; }
+  .store-badges { gap: 14px; }
+  .google-play-badge img, .app-store-badge img { height: 40px; }
+}
+
 @media (max-width: 600px) {
   .container { width: 88%; }
   .site-header { padding-block: 48px 8px; }
   .company-logo { width: min(240px, 100%); }
   .wordmark { font-size: clamp(1.9rem, 7vw, 2.4rem); }
-  .product-nav-inner { width: calc(100% - 24px); grid-template-columns: 0 minmax(0, 1fr) 0; column-gap: 0; transition: grid-template-columns 240ms ease, column-gap 240ms ease; }
-  .product-navigation.is-stuck .product-nav-inner { grid-template-columns: 44px minmax(0, 1fr) 0; column-gap: 6px; }
-  .company-logo.nav-logo { width: 44px; }
   .product-links { gap: 0 12px; }
   .nav-rosarium { font-size: .875rem; }
   .nav-book { font-size: 1rem; }
@@ -326,8 +354,6 @@ p, h1, h2 { margin: 0; }
   .product-actions { margin-top: 24px; }
   .button { gap: 18px; padding-inline: 17px; }
   .product + .product { padding-top: 34px; }
-  .book-title { font-size: clamp(1.75rem, 6.8vw, 2.5rem); }
-  .catalog-book-title { font-size: clamp(1.75rem, 6.8vw, 2.5rem); }
   .site-footer { margin-top: 30px; }
   .footer-wordmark { font-size: .9375rem; }
 }

@@ -4,6 +4,7 @@
   :root:not([data-theme]) .product-navigation { --menu-background: #343d49; }
 }
 .home-appearance { display: none; }
+.nav-tagline { display: none; }
 .theme-choices { display: none; }
 .mobile-menu-toggle { display: none; }
 .menu-bars { position: relative; display: block; width: 24px; height: 18px; }
@@ -14,9 +15,22 @@
 .mobile-menu-toggle[aria-expanded="true"] .menu-bars span:nth-child(2) { opacity: 0; transform: scaleX(.3); }
 .mobile-menu-toggle[aria-expanded="true"] .menu-bars span:last-child { transform: translateY(0) rotate(-45deg); }
 @media (max-width: 839px) {
+  /* Keep #top and the accessible page heading, with the visible brand in the bar. */
+  .site-header { padding-block: 0; }
+  .site-header .company-logo, .site-header .site-tagline { display: none; }
+  .product-navigation .product-nav-inner {
+    width: 94%; min-height: 84px; column-gap: 8px;
+    grid-template-columns: 64px minmax(0, 1fr) 44px;
+  }
+  .product-navigation .company-logo.nav-logo { width: 64px; opacity: 1; visibility: visible; pointer-events: auto; }
+  .nav-tagline {
+    display: block; grid-column: 2; grid-row: 1; color: var(--muted);
+    font-size: clamp(.875rem, 3.7vw, 1rem); line-height: 1.35;
+  }
+  /* Product links stay available as a second row if scripts cannot run. */
+  .product-navigation:not(.has-menu) .product-links { grid-column: 1 / -1; gap: 0 12px; }
+  .product-navigation:not(.has-menu) .home-appearance { display: none; }
   .product-navigation.has-menu { overflow-x: clip; }
-  .product-navigation.has-menu .product-nav-inner { width: 94%; min-height: 84px; grid-template-columns: 64px minmax(0, 1fr); column-gap: 8px; }
-  .product-navigation.has-menu .company-logo.nav-logo { width: 64px; opacity: 1; visibility: visible; pointer-events: auto; }
   .site-header > .theme-toggle { display: none; }
   .home-appearance { display: block; }
   .product-navigation .book-appearance, .product-navigation .home-appearance { position: static; width: 100%; margin: 10px 0 0; padding: 20px 0 0; border-top: 1px solid var(--rule); }
@@ -27,7 +41,7 @@
   .theme-choice:hover { color: var(--ink); background: var(--surface-strong); }
   .theme-choice[aria-pressed="true"] { color: var(--ink); border-color: var(--brass); background: var(--surface-strong); }
   .theme-choice:active { transform: scale(.95); }
-  .product-navigation.has-menu .mobile-menu-toggle { display: inline-flex; align-items: center; justify-content: center; grid-column: 2; grid-row: 1; justify-self: end; width: 44px; height: 44px; padding: 0; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+  .product-navigation.has-menu .mobile-menu-toggle { display: inline-flex; align-items: center; justify-content: center; grid-column: 3; grid-row: 1; justify-self: end; width: 44px; height: 44px; padding: 0; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
   .product-navigation .mobile-menu-toggle[hidden] { display: none; }
   .mobile-menu-toggle:hover { color: var(--brass); }
   /* The panel unfurls from the navbar, then folds back into its top edge.
@@ -38,7 +52,7 @@
     margin-left: calc(-50% / .94); width: calc(100% / .94);
     display: flex; flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: flex-start;
     gap: 12px; padding: 24px max(6vw, calc((100vw - 540px) / 2)) 28px;
-    max-height: calc(100svh - 85px); overflow-y: auto; overscroll-behavior: contain;
+    max-height: calc(100svh - var(--navigation-height, 84px) - 1px); overflow-y: auto; overscroll-behavior: contain;
     border: 0; border-bottom: 1px solid var(--rule); border-radius: 0 0 12px 12px;
     background: var(--menu-background); box-shadow: 0 24px 36px -26px #00000080;
     opacity: .4; visibility: hidden; pointer-events: none;
